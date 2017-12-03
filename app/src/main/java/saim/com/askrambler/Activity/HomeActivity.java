@@ -118,10 +118,10 @@ public class HomeActivity extends AppCompatActivity {
         btnFabCreatePost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (new SharedPrefDatabase(getApplicationContext()).RetriveLogin()!=null &&new SharedPrefDatabase(getApplicationContext()).RetriveLogin().equals("Yes")){
-
-                }else {
+                if (new SharedPrefDatabase(getApplicationContext()).RetriveLogin() == null || new SharedPrefDatabase(getApplicationContext()).RetriveLogin().equals("No")){
                     startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                }else if (new SharedPrefDatabase(getApplicationContext()).RetriveLogin().toString().equals("Yes") ){
+                    startActivity(new Intent(getApplicationContext(), AddPostActivity.class));
                 }
             }
         });
@@ -154,7 +154,7 @@ public class HomeActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                     drawerLayout.closeDrawers();
                 } else if (item.getItemId() == R.id.btnMenuAddPost) {
-                    if (new SharedPrefDatabase(getApplicationContext()).RetriveLogin() == null){
+                    if (new SharedPrefDatabase(getApplicationContext()).RetriveLogin() == null || new SharedPrefDatabase(getApplicationContext()).RetriveLogin().equals("No")){
                         startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                     }else if (new SharedPrefDatabase(getApplicationContext()).RetriveLogin().toString().equals("Yes") ){
                         startActivity(new Intent(getApplicationContext(), AddPostActivity.class));
