@@ -84,6 +84,7 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.AppThemeNew);
         setContentView(R.layout.activity_profile);
 
         toolbarProfile = (Toolbar) findViewById(R.id.toolbarProfile);

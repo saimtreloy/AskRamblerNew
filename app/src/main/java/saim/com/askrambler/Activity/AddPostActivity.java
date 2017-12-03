@@ -134,6 +134,7 @@ public class AddPostActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.AppThemeNew);
         setContentView(R.layout.activity_add_post);
 
         toolbarAddPost = (Toolbar) findViewById(R.id.toolbarAddPost);

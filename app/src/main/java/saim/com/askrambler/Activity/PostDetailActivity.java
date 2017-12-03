@@ -67,6 +67,7 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.AppThemeNew);
         setContentView(R.layout.activity_post_detail);
 
         init();

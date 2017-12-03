@@ -43,6 +43,7 @@ public class SearchResultActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.AppThemeNew);
         setContentView(R.layout.activity_search_result);
 
         init();

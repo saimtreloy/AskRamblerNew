@@ -11,4 +11,11 @@
         <item name="android:windowTranslucentNavigation" tools:targetApi="kitkat">false</item>
     </style>
 
+    <style name="AppThemeNew" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
 </resources>
