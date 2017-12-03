@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
+    android:background="@drawable/ic_back_signin2"
+    tools:context="saim.com.askrambler.Activity.ProfileActivity">
+
+    <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/toolbarProfile"
+        android:layout_width="match_parent"
+        android:layout_height="76dp"
+        android:background="@color/colorAccent"
+        android:fitsSystemWindows="true"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <LinearLayout
+        android:id="@+id/layoutProfileImage"
+        android:layout_width="match_parent"
+        android:layout_margin="16dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbarProfile"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imgProfileImage"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_person" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <TextView
+                android:id="@+id/inputProFullName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="User fullname"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="14dp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/inputProEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="User email"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="14dp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/inputProPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="User Mobile"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="14dp"
+                android:textStyle="italic" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardLogin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_below="@id/layoutProfileImage"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:cardBackgroundColor="#66F6B81F"
+        app:cardCornerRadius="6dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#99FFFFFF"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtProProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="Profile"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text=" | "/>
+
+                <TextView
+                    android:id="@+id/txtProChangePassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="Password"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/layoutProProfile"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:visibility="visible"
+                android:layout_below="@+id/linearLayout">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/imgLoginLogo"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginBottom="2dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center|left"
+                                android:text="Country"
+                                android:textAllCaps="false"
+                                android:textColor="@android:color/white"
+                                android:textSize="12dp"
+                                android:textStyle="italic" />
+
+                            <TextView
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center|left"
+                                android:text="State"
+                                android:textAllCaps="false"
+                                android:textColor="@android:color/white"
+                                android:textSize="12dp"
+                                android:textStyle="italic" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/inputProCountry"
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:layout_marginRight="2dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/ic_round"
+                                android:hint="Country"
+                                android:focusable="false"
+                                android:focusableInTouchMode="false"
+                                android:textSize="12dp" />
+
+                            <EditText
+                                android:id="@+id/inputProState"
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:layout_marginLeft="2dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/ic_round"
+                                android:hint="State"
+                                android:textSize="12dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginBottom="2dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center|left"
+                                android:text="City"
+                                android:textAllCaps="false"
+                                android:textColor="@android:color/white"
+                                android:textSize="12dp"
+                                android:textStyle="italic" />
+
+                            <TextView
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center|left"
+                                android:text="Zip code"
+                                android:textAllCaps="false"
+                                android:textColor="@android:color/white"
+                                android:textSize="12dp"
+                                android:textStyle="italic" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/inputProCity"
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:layout_marginRight="2dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/ic_round"
+                                android:hint="City"
+                                android:textSize="12dp" />
+
+                            <EditText
+                                android:id="@+id/inputProZip"
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:layout_marginLeft="2dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/ic_round"
+                                android:hint="Zip"
+                                android:textSize="12dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginBottom="2dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center|left"
+                                android:text="Address"
+                                android:textAllCaps="false"
+                                android:textColor="@android:color/white"
+                                android:textSize="12dp"
+                                android:textStyle="italic" />
+
+                            <TextView
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center|left"
+                                android:text="Birthday"
+                                android:textAllCaps="false"
+                                android:textColor="@android:color/white"
+                                android:textSize="12dp"
+                                android:textStyle="italic" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/inputProAddress"
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:layout_marginRight="2dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/ic_round"
+                                android:hint="Address"
+                                android:textSize="12dp" />
+
+                            <EditText
+                                android:id="@+id/inputProBirthday"
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:layout_marginLeft="2dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/ic_round"
+                                android:focusable="false"
+                                android:focusableInTouchMode="false"
+                                android:hint="Birthday"
+                                android:textSize="12dp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginBottom="2dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center|left"
+                                android:text="Gender"
+                                android:textAllCaps="false"
+                                android:textColor="@android:color/white"
+                                android:textSize="12dp"
+                                android:textStyle="italic" />
+
+                            <TextView
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center|left"
+                                android:text="Phone number"
+                                android:textAllCaps="false"
+                                android:textColor="@android:color/white"
+                                android:textSize="12dp"
+                                android:textStyle="italic" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/inputProGender"
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:layout_marginRight="2dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/ic_round"
+                                android:focusable="false"
+                                android:focusableInTouchMode="false"
+                                android:hint="Gender"
+                                android:textSize="12dp" />
+
+                            <EditText
+                                android:id="@+id/inputProMobile"
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:layout_marginLeft="2dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/ic_round"
+                                android:hint="Phone"
+                                android:textSize="12dp" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center|left"
+                            android:text="website"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginBottom="2dp"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/white"
+                            android:textSize="12dp"
+                            android:textStyle="italic" />
+
+                        <EditText
+                            android:id="@+id/inputProWebsite"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_marginRight="2dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/ic_round"
+                            android:hint="Website"
+                            android:textSize="12dp" />
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center|left"
+                            android:text="Facebook link"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginBottom="2dp"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/white"
+                            android:textSize="12dp"
+                            android:textStyle="italic" />
+                        <EditText
+                            android:id="@+id/inputProFacebook"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_marginRight="2dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/ic_round"
+                            android:hint="Facebook Profile"
+                            android:textSize="12dp" />
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center|left"
+                            android:text="Instagram link"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginBottom="2dp"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/white"
+                            android:textSize="12dp"
+                            android:textStyle="italic" />
+                        <EditText
+                            android:id="@+id/inputProInstagram"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_marginRight="2dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/ic_round"
+                            android:hint="Instagram Profile"
+                            android:textSize="12dp" />
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center|left"
+                            android:text="Youtube chanel link"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginBottom="2dp"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/white"
+                            android:textSize="12dp"
+                            android:textStyle="italic" />
+                        <EditText
+                            android:id="@+id/inputProYoutube"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_marginRight="2dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/ic_round"
+                            android:hint="Youtube Profile"
+                            android:textSize="12dp" />
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center|left"
+                            android:text="Like to"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginBottom="2dp"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/white"
+                            android:textSize="12dp"
+                            android:textStyle="italic" />
+
+                        <EditText
+                            android:id="@+id/inputProLikeTo"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_marginRight="2dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/ic_round"
+                            android:hint="Like To"
+                            android:textSize="12dp" />
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center|left"
+                            android:text="User personal detail"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginBottom="2dp"
+                            android:textAllCaps="false"
+                            android:textColor="@android:color/white"
+                            android:textSize="12dp"
+                            android:textStyle="italic" />
+                        <EditText
+                            android:id="@+id/inputProDetail"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp"
+                            android:layout_marginRight="2dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/ic_round"
+                            android:hint="Detail About You"
+                            android:inputType="textMultiLine"
+                            android:textSize="12dp" />
+
+                        <Button
+                            android:id="@+id/btnProUpdate"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/ic_round"
+                            android:elevation="4dp"
+                            android:gravity="center"
+                            android:text="Update Profile"
+                            android:textColor="@color/colorAccent" />
+
+
+                    </LinearLayout>
+
+
+                </ScrollView>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layoutProChangePasword"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:visibility="gone"
+                android:layout_below="@+id/linearLayout">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/imgLoginLogo"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <EditText
+                            android:id="@+id/inputProCurrentPassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/ic_round"
+                            android:hint="Full Name"
+                            android:textSize="12dp" />
+
+                        <EditText
+                            android:id="@+id/inputProNewPassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/ic_round"
+                            android:hint="New Password"
+                            android:textSize="12dp" />
+
+                        <EditText
+                            android:id="@+id/inputProNewPasswordC"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/ic_round"
+                            android:hint="New Password Confirm"
+                            android:textSize="12dp" />
+
+                        <Button
+                            android:id="@+id/btnProUpdateChangePassword"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/ic_round"
+                            android:elevation="4dp"
+                            android:gravity="center"
+                            android:text="Update Password"
+                            android:textColor="@color/colorAccent" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:textStyle="italic"
+                            android:textColor="@color/colorAccent"
+                            android:text="Upload Passport, Driving License or National/Social ID "/>
+
+                        <ImageView
+                            android:id="@+id/imgProUploadDocument"
+                            android:layout_width="match_parent"
+                            android:layout_height="150dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_placeholder"/>
+                        <Button
+                            android:id="@+id/btnProUpdateDocument"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/ic_round"
+                            android:elevation="4dp"
+                            android:gravity="center"
+                            android:text="Upload Document"
+                            android:textColor="@color/colorAccent" />
+                    </LinearLayout>
+
+                </ScrollView>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

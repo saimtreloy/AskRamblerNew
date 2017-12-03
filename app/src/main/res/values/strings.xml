@@ -1,0 +1,69 @@
+<resources>
+    <string name="app_name">Ask Rambler</string>
+    <string name="drawer_open">Drawer Open</string>
+    <string name="drawer_close">Drawer Close</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string-array name="gender">
+        <item>Any</item>
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="baggage_type">
+        <item>All</item>
+        <item>Food</item>
+        <item>Cloths</item>
+        <item>Gift Box</item>
+        <item>Ornaments</item>
+        <item>Others</item>
+    </string-array>
+
+    <string-array name="transport_type">
+        <item>All</item>
+        <item>Motorcycle</item>
+        <item>Car</item>
+        <item>Bus</item>
+        <item>Train</item>
+        <item>Boat</item>
+        <item>Plane</item>
+        <item>Others</item>
+    </string-array>
+
+    <string-array name="payment_category">
+        <item>All</item>
+        <item>Stay Free</item>
+        <item>Stay And Help</item>
+        <item>Pay for Staying </item>
+    </string-array>
+
+    <string-array name="trip_category">
+        <item>Beach</item>
+        <item>Romantic</item>
+        <item>Mountains</item>
+        <item>Explore</item>
+        <item>Ice </item>
+        <item>Hill Tracking </item>
+        <item>Forest</item>
+        <item>River</item>
+        <item>Road Trip</item>
+        <item>Others</item>
+    </string-array>
+
+    <string-array name="smoking_habit">
+        <item>Smoker</item>
+        <item>Non-smoker</item>
+        <item>Any</item>
+    </string-array>
+
+    <string-array name="alcohol_habit">
+        <item>Alcoholic</item>
+        <item>Non-Alcoholic</item>
+        <item>Any</item>
+    </string-array>
+    <string name="title_activity_post_maps">Map</string>
+    <string name="title_activity_maps">Map</string>
+</resources>

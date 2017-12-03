@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
+    android:background="@drawable/ic_back_signin"
+    tools:context="saim.com.askrambler.Activity.AdvancedSearchActivity">
+
+    <android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/toolbarAdvancedSearch"
+        android:layout_width="match_parent"
+        android:layout_height="76dp"
+        android:background="@color/colorAccent"
+        android:fitsSystemWindows="true"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardAdvancedSearch"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/toolbarAdvancedSearch"
+        android:orientation="vertical"
+        app:cardBackgroundColor="#66F6B81F"
+        app:cardCornerRadius="6dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnSPostCom"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/ic_campanion"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="Companion"
+                    android:textColor="#FFFFFF"
+                    android:textSize="10sp" />
+
+                <Button
+                    android:id="@+id/btnSPostBag"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/ic_baggage"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="Baggage"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btnSPostTrip"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/ic_trip"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="Trips"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/btnSPostHost"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableTop="@drawable/ic_host"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="Host"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/linearLayout"
+                android:background="#66FFFFFF" />
+
+            <RelativeLayout
+                android:id="@+id/layoutSPostCompanion"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/linearLayout"
+                android:visibility="visible">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/inputSComFrom"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/ic_round"
+                            android:hint="Eg. Melbourn, Australia"
+                            android:textSize="12dp" />
+
+                        <AutoCompleteTextView
+                            android:id="@+id/inputSComTo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/ic_round"
+                            android:hint="Eg. New York, United State"
+                            android:textSize="12dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/inputSConExpectedDate"
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:layout_marginRight="2dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/ic_round"
+                                android:focusable="false"
+                                android:hint="Expected Travel Date"
+                                android:textSize="12dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="2dp"
+                                android:layout_marginRight="2dp"
+                                android:gravity="center"
+                                android:text="TO"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/inputSComExpectedDate1"
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:layout_marginLeft="2dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/ic_round"
+                                android:focusable="false"
+                                android:hint="Expected Travel Date"
+                                android:textSize="12dp" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/inputSComGender"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_marginRight="2dp"
+                            android:layout_marginTop="6dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/ic_round"
+                            android:focusable="false"
+                            android:hint="Gender"
+                            android:textSize="12dp" />
+
+                        <Button
+                            android:id="@+id/btnSComSearch"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/ic_round"
+                            android:elevation="4dp"
+                            android:gravity="center"
+                            android:text="Search Companion"
+                            android:textColor="@color/colorAccent" />
+
+
+                    </LinearLayout>
+
+
+                </ScrollView>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layoutSPostBaggage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/linearLayout"
+                android:visibility="gone">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/inputSBagFrom"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/ic_round"
+                            android:hint="Eg. New York, United State"
+                            android:textSize="12dp" />
+
+                        <AutoCompleteTextView
+                            android:id="@+id/inputSBagTo"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/ic_round"
+                            android:hint="Eg. New York, United State"
+                            android:textSize="12dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/inputSBagExpectedDate"
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:layout_marginRight="2dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/ic_round"
+                                android:focusable="false"
+                                android:focusableInTouchMode="false"
+                                android:hint="Travel Date"
+                                android:textSize="12dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="2dp"
+                                android:layout_marginRight="2dp"
+                                android:focusable="true"
+                                android:gravity="center"
+                                android:hint="TO"
+                                android:textStyle="bold" />
+
+                            <EditText
+                                android:id="@+id/inputSBagExpectedDate1"
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:layout_marginLeft="2dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/ic_round"
+                                android:focusable="false"
+                                android:focusableInTouchMode="false"
+                                android:hint="Travel Date"
+                                android:textSize="12dp" />
+
+                        </LinearLayout>
+
+                        <EditText
+                            android:id="@+id/inputSBagBaggageType"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_marginRight="2dp"
+                            android:layout_marginTop="6dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/ic_round"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false"
+                            android:hint="Baggage Type"
+                            android:textSize="12dp" />
+
+                        <Button
+                            android:id="@+id/btnSBagSearchAdd"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/ic_round"
+                            android:elevation="4dp"
+                            android:gravity="center"
+                            android:text="Search Transport"
+                            android:textColor="@color/colorAccent" />
+
+
+                    </LinearLayout>
+
+
+                </ScrollView>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layoutSPostTrip"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/linearLayout"
+                android:visibility="gone">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/inputSTripFrom"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/ic_round"
+                            android:hint="Eg. New York, United State"
+                            android:textSize="12dp" />
+
+                        <AutoCompleteTextView
+                            android:id="@+id/inputSTripTo"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/ic_round"
+                            android:hint="Eg. New York, United State"
+                            android:textSize="12dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/inputSTripExpectedDate"
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:layout_marginRight="2dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/ic_round"
+                                android:focusable="false"
+                                android:hint="Travel Date"
+                                android:textSize="12dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="2dp"
+                                android:layout_marginRight="2dp"
+                                android:gravity="center"
+                                android:hint="TO"
+                                android:textStyle="bold" />
+
+                            <EditText
+                                android:id="@+id/inputSTripExpectedDate1"
+                                android:layout_width="match_parent"
+                                android:layout_height="35dp"
+                                android:layout_marginLeft="2dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/ic_round"
+                                android:focusable="false"
+                                android:hint="Travel Date"
+                                android:textSize="12dp" />
+
+                        </LinearLayout>
+
+                        <EditText
+                            android:id="@+id/inputSTripTransportType"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_marginRight="2dp"
+                            android:layout_marginTop="6dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/ic_round"
+                            android:focusable="false"
+                            android:hint="Transport Type"
+                            android:textSize="12dp" />
+
+                        <Button
+                            android:id="@+id/btnSTripSearchAdd"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/ic_round"
+                            android:elevation="4dp"
+                            android:gravity="center"
+                            android:text="Search Trip"
+                            android:textColor="@color/colorAccent" />
+
+
+                    </LinearLayout>
+
+
+                </ScrollView>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layoutSPostHost"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/linearLayout"
+                android:visibility="gone">
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/inputSHostFrom"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/ic_round"
+                            android:hint="Eg. New York, United State"
+                            android:textSize="12dp" />
+
+                        <EditText
+                            android:id="@+id/inputSHostPaymentCategory"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/ic_round"
+                            android:focusable="false"
+                            android:hint="Payment Category"
+                            android:textSize="12dp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="No of Travelers"
+                            android:textColor="@color/colorAccent"
+                            android:textStyle="italic" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/txtSHostNoTraveler"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="1"
+                                android:textColor="@color/colorAccent"
+                                android:textStyle="bold" />
+
+                            <SeekBar
+                                android:id="@+id/seekBarSHostNoTraveler"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="20"
+                                android:textColor="@color/colorAccent"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/btnSHostSearchAdd"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/ic_round"
+                            android:elevation="4dp"
+                            android:gravity="center"
+                            android:text="Search Host"
+                            android:textColor="@color/colorAccent" />
+
+
+                    </LinearLayout>
+
+
+                </ScrollView>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/btnMenuProfile"
+        android:icon="@drawable/ic_person"
+        android:title="Profile" />
+    <item
+        android:id="@+id/btnMenuSignIn"
+        android:icon="@drawable/ic_sign_in"
+        android:title="Sign In" />
+    <item
+        android:id="@+id/btnMenuAddPost"
+        android:icon="@drawable/ic_add_post"
+        android:title="Add Post" />
+    <item
+        android:id="@+id/btnMenuAdvancedSearch"
+        android:icon="@drawable/ic_search"
+        android:title="Advanced Search" />
+    <item
+        android:id="@+id/btnMenuPopularTrip"
+        android:icon="@drawable/ic_popular_trip"
+        android:title="Popular Trip" />
+</menu>
