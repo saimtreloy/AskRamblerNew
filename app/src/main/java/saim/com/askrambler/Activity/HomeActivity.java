@@ -43,6 +43,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import saim.com.askrambler.Adapter.AdapterPost;
+import saim.com.askrambler.Maps.GPSTracker;
 import saim.com.askrambler.Model.ModelPostShort;
 import saim.com.askrambler.R;
 import saim.com.askrambler.Util.ApiURL;
@@ -73,9 +74,9 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        /*if (havePermission()){
-            startService(new Intent(getApplicationContext(), MyService.class));
-        }*/
+        if (havePermission()){
+            startService(new Intent(getApplicationContext(), GPSTracker.class));
+        }
 
         Initialization();
     }
@@ -364,7 +365,7 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.btnMenuLocation:
-                //startActivity(new Intent(this, PostMapsActivity.class));
+                startActivity(new Intent(this, MapsActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

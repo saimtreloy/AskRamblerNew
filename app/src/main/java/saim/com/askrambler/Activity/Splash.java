@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import saim.com.askrambler.Model.ModelLocation;
 import saim.com.askrambler.Model.ModelPostShort;
 import saim.com.askrambler.Model.ModelUser;
 import saim.com.askrambler.R;
@@ -29,6 +30,7 @@ import saim.com.askrambler.Util.SharedPrefDatabase;
 public class Splash extends AppCompatActivity {
 
     public static ArrayList<ModelPostShort> modelPostsList = new ArrayList<>();
+    public static ArrayList<ModelLocation> modelLocationList = new ArrayList<>();
     public static ModelUser modelUser = new ModelUser();
 
     public static String user_id, nationality, full_name, email, password, agreement, status, roll,
@@ -71,7 +73,7 @@ public class Splash extends AppCompatActivity {
                                     modelPostsList.add(modelPostShort);
                                 }
 
-                                if (new SharedPrefDatabase(getApplicationContext()).RetriveLogin() != null){
+                                /*if (new SharedPrefDatabase(getApplicationContext()).RetriveLogin() != null){
                                     if (new SharedPrefDatabase(getApplicationContext()).RetriveLogin().equals("Yes")){
                                         SaveUserLogin();
                                     }else if (new SharedPrefDatabase(getApplicationContext()).RetriveLogin().equals("No")){
@@ -81,7 +83,9 @@ public class Splash extends AppCompatActivity {
                                 }else {
                                     startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                                     finish();
-                                }
+                                }*/
+
+                                SaveGetAllLocationInformation();
 
 
                             }else {
@@ -110,6 +114,7 @@ public class Splash extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        Log.d("SAIM SAIM SAIM", response);
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             String code = jsonObject.getString("code");
@@ -181,6 +186,65 @@ public class Splash extends AppCompatActivity {
         };
         stringRequest.setShouldCache(false);
         MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+    }
+
+
+    public void SaveGetAllLocationInformation() {
+        modelLocationList.clear();
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, ApiURL.locationInformation,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+
+                            String code = jsonObject.getString("code").trim();
+
+                            if (code.equals("success")) {
+                                JSONArray jsonArray = jsonObject.getJSONArray("list");
+                                for (int i = 0; i < jsonArray.length(); i++) {
+                                    JSONObject jsonObjectList = jsonArray.getJSONObject(i);
+                                    String id = jsonObjectList.getString("id");
+                                    String ads_id = jsonObjectList.getString("ads_id");
+                                    String post_user_id = jsonObjectList.getString("post_user_id");
+                                    String lat = jsonObjectList.getString("lat");
+                                    String lon = jsonObjectList.getString("lon");
+
+
+                                    ModelLocation modelLocation = new ModelLocation(id, ads_id, post_user_id, lat, lon);
+                                    modelLocationList.add(modelLocation);
+                                }
+                                if (new SharedPrefDatabase(getApplicationContext()).RetriveLogin() != null){
+                                    if (new SharedPrefDatabase(getApplicationContext()).RetriveLogin().equals("Yes")){
+                                        SaveUserLogin();
+                                    }else if (new SharedPrefDatabase(getApplicationContext()).RetriveLogin().equals("No")){
+                                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                                        finish();
+                                    }
+                                }else {
+                                    startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                                    finish();
+                                }
+
+
+                            }else {
+                                Log.d("SAIM SPLASH 3", response);
+                            }
+
+
+                        } catch (Exception e) {
+
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        stringRequest.setShouldCache(false);
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+
     }
 
 }

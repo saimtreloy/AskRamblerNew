@@ -37,4 +37,6 @@ public class ApiURL {
     public static String tripAddPost = "http://askrambler.com/Android_API/addPostTrip.php";
     public static String hostAddPost = "http://askrambler.com/Android_API/addPostHost.php";
 
+
+    public static String locationInformation = "http://askrambler.com/Android_API/getAllLatLon.php";
 }
