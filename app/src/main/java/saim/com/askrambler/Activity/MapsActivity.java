@@ -18,7 +18,9 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
@@ -26,6 +28,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import saim.com.askrambler.Adapter.AdapterPost;
 import saim.com.askrambler.Maps.GPSTracker;
 import saim.com.askrambler.Model.ModelLocation;
 import saim.com.askrambler.Model.ModelPostShort;
@@ -34,7 +37,7 @@ import saim.com.askrambler.Util.ApiURL;
 import saim.com.askrambler.Util.MySingleton;
 import saim.com.askrambler.Util.SharedPrefDatabase;
 
-public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     Toolbar toolbarMaps;
 
@@ -42,6 +45,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public static ArrayList<ModelLocation> modelLocationList = new ArrayList<>();
 
     private GoogleMap mMap;
+    private Marker myMarker;
     GPSTracker gps;
 
     SupportMapFragment mapFragment;
@@ -64,6 +68,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(MapsActivity.this);
 
+
+
     }
 
 
@@ -71,6 +77,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setOnMarkerClickListener(this);
         // Add a marker in Sydney and move the camera
 
         gps = new GPSTracker(MapsActivity.this);
@@ -83,13 +90,22 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             CameraUpdate zoom = CameraUpdateFactory.newLatLngZoom(sydney,7);
             mMap.moveCamera(center);
             mMap.animateCamera(zoom);
-            mMap.addMarker(new MarkerOptions().position(sydney).title("My Location"));
+            //mMap.addMarker(new MarkerOptions().position(sydney).title("My Location"));
+
+            myMarker = mMap.addMarker(new MarkerOptions()
+                    .position(sydney)
+                    .title("My Spot")
+                    .snippet("This is my spot!")
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 
             for (int i=0; i<Splash.modelLocationList.size(); i++){
                 double lt = Double.parseDouble(Splash.modelLocationList.get(i).getLat());
                 double ln = Double.parseDouble(Splash.modelLocationList.get(i).getLon());
                 LatLng latLng = new LatLng(lt, ln);
-                mMap.addMarker(new MarkerOptions().position(latLng).title(Splash.modelLocationList.get(i).getAds_id()));
+                String postTitle = Splash.modelLocationList.get(i).getAds_id();
+                myMarker = mMap.addMarker(new MarkerOptions()
+                        .position(latLng)
+                        .title(postTitle));
             }
 
         }else{
@@ -146,4 +162,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        if (marker.equals(myMarker)) {
+            AdapterPost.post_id = marker.getTitle();
+            startActivity(new Intent(getApplicationContext(), PostDetailActivity.class));
+        }
+
+        return true;
+    }
 }
