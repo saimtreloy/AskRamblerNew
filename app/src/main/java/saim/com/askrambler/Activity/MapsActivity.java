@@ -2,6 +2,10 @@ package saim.com.askrambler.Activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +22,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -68,8 +73,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(MapsActivity.this);
 
-
-
     }
 
 
@@ -77,98 +80,74 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.setOnMarkerClickListener(this);
-        // Add a marker in Sydney and move the camera
+        mMap.clear();
 
         gps = new GPSTracker(MapsActivity.this);
         if(gps.canGetLocation()){
 
             double latitude = gps.getLatitude();
             double longitude = gps.getLongitude();
+            Log.d("SAIM LOCATION", latitude + " " + longitude);
             LatLng sydney = new LatLng(latitude, longitude);
             CameraUpdate center = CameraUpdateFactory.newLatLng(sydney);
             CameraUpdate zoom = CameraUpdateFactory.newLatLngZoom(sydney,7);
             mMap.moveCamera(center);
             mMap.animateCamera(zoom);
-            //mMap.addMarker(new MarkerOptions().position(sydney).title("My Location"));
+
+            Drawable dPersonal = getResources().getDrawable(R.drawable.ic_map_person);
+            BitmapDescriptor markerIconP = getMarkerIconFromDrawable(dPersonal);
 
             myMarker = mMap.addMarker(new MarkerOptions()
                     .position(sydney)
                     .title("My Spot")
                     .snippet("This is my spot!")
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+                    .icon(markerIconP));
 
             for (int i=0; i<Splash.modelLocationList.size(); i++){
                 double lt = Double.parseDouble(Splash.modelLocationList.get(i).getLat());
                 double ln = Double.parseDouble(Splash.modelLocationList.get(i).getLon());
                 LatLng latLng = new LatLng(lt, ln);
                 String postTitle = Splash.modelLocationList.get(i).getAds_id();
-                myMarker = mMap.addMarker(new MarkerOptions()
-                        .position(latLng)
-                        .title(postTitle));
+                String postMessage = Splash.modelLocationList.get(i).getIsType();
+
+                Drawable dHost = getResources().getDrawable(R.drawable.ic_map_host);
+                BitmapDescriptor markerIcon = getMarkerIconFromDrawable(dHost);
+
+                myMarker = mMap.addMarker(new MarkerOptions().position(latLng).title(postTitle).snippet(postMessage).icon(markerIcon));
             }
 
+            mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                @Override
+                public void onInfoWindowClick(Marker marker) {
+
+                    if (!marker.getTitle().equals("My Spot")){
+                        Intent i = new Intent(getApplicationContext(), PostDetailActivity.class);
+                        i.putExtra("POST_ID", marker.getTitle().trim());
+                        startActivity(i);
+                    }
+                }
+            });
         }else{
             gps.showSettingsAlert();
         }
     }
 
-
-    public void SaveGetAllLocationInformation() {
-        modelLocationList.clear();
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, ApiURL.locationInformation,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-
-                            String code = jsonObject.getString("code").trim();
-
-                            if (code.equals("success")) {
-                                JSONArray jsonArray = jsonObject.getJSONArray("list");
-                                for (int i = 0; i < jsonArray.length(); i++) {
-                                    JSONObject jsonObjectList = jsonArray.getJSONObject(i);
-                                    String id = jsonObjectList.getString("id");
-                                    String ads_id = jsonObjectList.getString("ads_id");
-                                    String post_user_id = jsonObjectList.getString("post_user_id");
-                                    String lat = jsonObjectList.getString("lat");
-                                    String lon = jsonObjectList.getString("lon");
-
-
-                                    ModelLocation modelLocation = new ModelLocation(id, ads_id, post_user_id, lat, lon);
-                                    modelLocationList.add(modelLocation);
-                                }
-
-
-
-                            }else {
-                                Log.d("SAIM SPLASH 3", response);
-                            }
-
-
-                        } catch (Exception e) {
-
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        stringRequest.setShouldCache(false);
-        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
-
-    }
-
     @Override
     public boolean onMarkerClick(Marker marker) {
         if (marker.equals(myMarker)) {
-            AdapterPost.post_id = marker.getTitle();
-            startActivity(new Intent(getApplicationContext(), PostDetailActivity.class));
+
         }
 
         return true;
+    }
+
+
+    private BitmapDescriptor getMarkerIconFromDrawable(Drawable drawable) {
+        Canvas canvas = new Canvas();
+        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        canvas.setBitmap(bitmap);
+        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+        drawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 }

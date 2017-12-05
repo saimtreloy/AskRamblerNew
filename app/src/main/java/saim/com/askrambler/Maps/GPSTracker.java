@@ -36,7 +36,7 @@ public class GPSTracker extends Service implements LocationListener {
     protected LocationManager locationManager;
 
     public GPSTracker(){
-
+        super();
     }
 
     public GPSTracker(Context context) {

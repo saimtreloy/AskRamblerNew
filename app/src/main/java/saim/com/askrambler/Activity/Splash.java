@@ -204,14 +204,16 @@ public class Splash extends AppCompatActivity {
                                 JSONArray jsonArray = jsonObject.getJSONArray("list");
                                 for (int i = 0; i < jsonArray.length(); i++) {
                                     JSONObject jsonObjectList = jsonArray.getJSONObject(i);
-                                    String id = jsonObjectList.getString("id");
                                     String ads_id = jsonObjectList.getString("ads_id");
                                     String post_user_id = jsonObjectList.getString("post_user_id");
                                     String lat = jsonObjectList.getString("lat");
                                     String lon = jsonObjectList.getString("lon");
+                                    String payment_category = jsonObjectList.getString("payment_category");
+                                    String isType = jsonObjectList.getString("isType");
+                                    String location = jsonObjectList.getString("location");
 
 
-                                    ModelLocation modelLocation = new ModelLocation(id, ads_id, post_user_id, lat, lon);
+                                    ModelLocation modelLocation = new ModelLocation(ads_id, post_user_id, lat, lon, payment_category, isType, location);
                                     modelLocationList.add(modelLocation);
                                 }
                                 if (new SharedPrefDatabase(getApplicationContext()).RetriveLogin() != null){

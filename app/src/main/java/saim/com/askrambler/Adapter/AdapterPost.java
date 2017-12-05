@@ -98,7 +98,9 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.PostViewHolder
         public void onClick(View v) {
             post_id = adapterList.get(getAdapterPosition()).ads_id;
             Log.d("SAIM POST ID", post_id);
-            v.getContext().startActivity(new Intent(v.getContext().getApplicationContext(), PostDetailActivity.class));
+            Intent i = new Intent(v.getContext().getApplicationContext(), PostDetailActivity.class);
+            i.putExtra("POST_ID", post_id);
+            v.getContext().startActivity(i);
         }
     }
 }

@@ -36,6 +36,7 @@ import java.util.List;
 import saim.com.askrambler.Adapter.AdapterPost;
 import saim.com.askrambler.R;
 import saim.com.askrambler.Util.ApiURL;
+import saim.com.askrambler.Util.CircleTransform;
 import saim.com.askrambler.Util.MySingleton;
 
 public class PostDetailActivity extends AppCompatActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener{
@@ -46,6 +47,7 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
     LinearLayout layoutPostDetailMain;
     private SliderLayout mDemoSlider;
     public List<String> bannerImage = new ArrayList<>();
+    public String post_id = "";
 
     String from_where, to_where, from_date, to_date, payment_category, gender, traveling_by, isType,
             baggage_type, baggage_weight, trip_category, trip_category_id, transport_type, trip_duration,
@@ -83,6 +85,8 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
         progressDialog.setMessage("Please wait data is loading...");
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
+
+        post_id = getIntent().getExtras().getString("POST_ID");
 
         layoutPostDetailMain = (LinearLayout) findViewById(R.id.layoutPostDetailMain);
         mDemoSlider = (SliderLayout) findViewById(R.id.slider);
@@ -156,7 +160,7 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
         }
 
         Glide.with(getApplicationContext())
-                .load(user_photo)
+                .load(user_photo).transform(new CircleTransform(getApplicationContext()))
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
                     public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
@@ -192,7 +196,7 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
         }
 
         Glide.with(getApplicationContext())
-                .load(user_photo)
+                .load(user_photo).transform(new CircleTransform(getApplicationContext()))
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
                     public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
@@ -229,7 +233,7 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
         }
 
         Glide.with(getApplicationContext())
-                .load(user_photo)
+                .load(user_photo).transform(new CircleTransform(getApplicationContext()))
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
                     public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
@@ -264,7 +268,7 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
         }
 
         Glide.with(getApplicationContext())
-                .load(user_photo)
+                .load(user_photo).transform(new CircleTransform(getApplicationContext()))
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
                     public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
@@ -334,7 +338,7 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
     }
 
     public void SaveGetPostInformation() {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, ApiURL.getAllPostDetail+ AdapterPost.post_id,
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, ApiURL.getAllPostDetail+ post_id,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
