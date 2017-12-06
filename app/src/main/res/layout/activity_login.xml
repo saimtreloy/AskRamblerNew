@@ -128,6 +128,68 @@
                     android:textColor="@color/colorAccent"
                     android:background="@drawable/ic_round"/>
 
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+
+                    <FrameLayout
+                        android:layout_weight="1"
+                        android:id="@+id/FrameLayout1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="3dp">
+
+                        <com.facebook.login.widget.LoginButton
+                            android:id="@+id/btnfb"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone" />
+
+                        <Button
+                            android:id="@+id/fb"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:background="@drawable/ic_round_facebook"
+                            android:text="Facebook"
+                            android:textAllCaps="false"
+                            android:onClick="onClick"
+                            android:textColor="#ffffff" />
+                    </FrameLayout>
+
+                    <com.google.android.gms.common.SignInButton
+                        android:layout_weight="1"
+                        android:id="@+id/sign_in_button"
+                        android:layout_width="match_parent"
+                        android:visibility="gone"
+                        android:layout_height="match_parent"/>
+
+                    <FrameLayout
+                        android:layout_weight="1"
+                        android:id="@+id/FrameLayout2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp">
+
+
+
+                        <Button
+                            android:id="@+id/gp"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:background="@drawable/ic_round_google"
+                            android:text="Google+"
+                            android:textAllCaps="false"
+                            android:onClick="onClickNew"
+                            android:textColor="@android:color/holo_red_dark" />
+                    </FrameLayout>
+
+
+
+                </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

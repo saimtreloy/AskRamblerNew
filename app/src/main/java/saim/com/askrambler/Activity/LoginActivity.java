@@ -3,6 +3,7 @@ package saim.com.askrambler.Activity;
 import android.animation.Animator;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,12 +22,38 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.androidquery.AQuery;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.facebook.AccessToken;
+import com.facebook.AccessTokenTracker;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.Profile;
+import com.facebook.ProfileTracker;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.plus.People;
+import com.google.android.gms.plus.Plus;
+import com.google.android.gms.plus.model.people.Person;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,7 +64,7 @@ import saim.com.askrambler.Util.SharedPrefDatabase;
 
 import static java.security.AccessController.getContext;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     Toolbar toolbarLogin;
 
@@ -54,10 +81,25 @@ public class LoginActivity extends AppCompatActivity {
     EditText inputRegFirstName, inputRegLastName, inputRegEmail, inputRegMobile, inputRegPassword, inputRegPasswordC;
     Button btnRegSignUp;
 
+    //Facebook Variables
+    private AQuery aQuery;
+    private CallbackManager callbackManager;
+    private AccessTokenTracker accessTokenTracker;
+    private ProfileTracker profileTracker;
+    private Button fb, gp;
+    private LoginButton loginButton;
+
+    //Google Signin
+    private SignInButton signInButton;
+    private GoogleSignInOptions gso;
+    private GoogleApiClient mGoogleApiClient;
+    private int SIGN_IN = 30;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppThemeNew);
+        FacebookSdk.sdkInitialize(this);
         setContentView(R.layout.activity_login);
 
         init();
@@ -95,6 +137,14 @@ public class LoginActivity extends AppCompatActivity {
 
         ButtonAction();
         //SaveUserLogin("asasa", "sasa");
+
+
+        //Facebook
+        FacebookSignIn();
+
+
+        GoogleSignIn();
+
     }
 
 
@@ -348,5 +398,213 @@ public class LoginActivity extends AppCompatActivity {
         };
         stringRequest.setShouldCache(false);
         MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+    }
+
+    public void FacebookSignIn(){
+        fb = (Button) findViewById(R.id.fb);
+        loginButton = (LoginButton) findViewById(R.id.btnfb);
+        callbackManager = CallbackManager.Factory.create();
+        accessTokenTracker= new AccessTokenTracker() {
+            @Override
+            protected void onCurrentAccessTokenChanged(AccessToken oldToken, AccessToken newToken) {
+
+            }
+        };
+
+        profileTracker = new ProfileTracker() {
+            @Override
+            protected void onCurrentProfileChanged(Profile oldProfile, Profile newProfile) {
+
+            }
+        };
+
+        accessTokenTracker.startTracking();
+        profileTracker.startTracking();
+        loginButton.setReadPermissions(Arrays.asList("public_profile", "email", "user_birthday", "user_friends"));
+        loginButton.registerCallback(callbackManager, callback);
+    }
+
+    private FacebookCallback<LoginResult> callback = new FacebookCallback<LoginResult>() {
+        @Override
+        public void onSuccess(LoginResult loginResult) {
+            GraphRequest request = GraphRequest.newMeRequest(
+                    loginResult.getAccessToken(),
+                    new GraphRequest.GraphJSONObjectCallback() {
+                        @Override
+                        public void onCompleted(JSONObject object, GraphResponse response) {
+                            Log.v("LoginActivity", response.toString());
+
+                            // Application code
+                            try {
+                                Log.d("tttttt",object.getString("id"));
+                                String birthday="";
+                                if(object.has("birthday")){
+                                    birthday = object.getString("birthday"); // 01/31/1980 format
+                                }
+
+                                String fnm = object.getString("first_name");
+                                String lnm = object.getString("last_name");
+                                String mail = object.getString("email");
+                                String gender = object.getString("gender");
+                                String fid = object.getString("id");
+                                String fbImage = "https://graph.facebook.com/"+fid+"/picture?type=large";
+
+                                Log.d("Saim FB Info", fnm + " " + lnm + "\n" + mail + "\n" + gender + "\n" + birthday + "\n" + fid + "\n" + fbImage);
+
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    });
+            Bundle parameters = new Bundle();
+            parameters.putString("fields", "id, first_name, last_name, email, gender, birthday, location");
+            request.setParameters(parameters);
+            request.executeAsync();
+
+        }
+
+        @Override
+        public void onCancel() {
+
+        }
+
+        @Override
+        public void onError(FacebookException error) {
+
+        }
+    };
+
+    public void onClick(View v) {
+        if (v == fb) {
+            loginButton.performClick();
+        }
+        if (v == gp) {
+            signInButton.performClick();
+        }
+    }
+
+    public void onClickNew(View v) {
+        if (v == gp) {
+            signInButton.performClick();
+        }
+    }
+
+
+    //Google Signin
+    public void GoogleSignIn(){
+        gp = (Button) findViewById(R.id.gp);
+        signInButton = (SignInButton) findViewById(R.id.sign_in_button);
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .addApi(Plus.API)
+                .build();
+
+        signInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+                startActivityForResult(signInIntent, SIGN_IN);
+            }
+        });
+        gp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+                startActivityForResult(signInIntent, SIGN_IN);
+            }
+        });
+    }
+
+
+    private void handleSignInResult(GoogleSignInResult result) {
+        //If the login succeed
+        if (result.isSuccess()) {
+            //Getting google account
+            final GoogleSignInAccount acct = result.getSignInAccount();
+
+            //Displaying name and email
+            String name = acct.getDisplayName();
+            final String mail = acct.getEmail();
+            // String photourl = acct.getPhotoUrl().toString();
+
+            final String givenname="",familyname="",displayname="",birthday="";
+
+            Plus.PeopleApi.load(mGoogleApiClient, acct.getId()).setResultCallback(new ResultCallback<People.LoadPeopleResult>() {
+                @Override
+                public void onResult(@NonNull People.LoadPeopleResult loadPeopleResult) {
+                    Person person = loadPeopleResult.getPersonBuffer().get(0);
+
+                    Log.d("GivenName ", person.getName().getGivenName());
+                    Log.d("FamilyName ",person.getName().getFamilyName());
+                    Log.d("DisplayName ",person.getDisplayName());
+                    Log.d("gender ", String.valueOf(person.getGender())); //0 = male 1 = female
+                    String gender="";
+                    if(person.getGender() == 0){
+                        gender = "Male";
+                    }else {
+                        gender = "Female";
+                    }
+
+                    if(person.hasBirthday()){
+                        //tv.setText(person.getName().getGivenName()+" \n"+person.getName().getFamilyName()+" \n"+gender+"\n"+person.getBirthday());
+                        Log.d("SAIM GOOGLE SIGN IN", person.getName().getGivenName()+" \n"+person.getName().getFamilyName()+" \n"+gender+"\n"+person.getBirthday() + "\n" + person.getImage().getUrl() +"\n"+ acct.getEmail());
+                    }else {
+                        Log.d("SAIM GOOGLE SIGN IN", person.getName().getGivenName() + " \n" + person.getName().getFamilyName() + " \n" + gender + "\n" + person.getImage().getUrl() +"\n"+ acct.getEmail());
+                    }
+                    //aQuery.id(iv).image(acct.getPhotoUrl().toString());
+                    //Log.d("Uriddd",acct.getPhotoUrl().toString());
+                    //Log.d(TAG,"CurrentLocation "+person.getCurrentLocation());
+                    //Log.d(TAG,"AboutMe "+person.getAboutMe());
+                    //Log.d("Birthday ",person.getBirthday());
+                    //Log.d(TAG,"Image "+person.getImage());
+                }
+            });
+        } else {
+            //If login fails
+            Toast.makeText(this, "Login Failed", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        Toast.makeText(this, "Login Failed", Toast.LENGTH_LONG).show();
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == SIGN_IN) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            handleSignInResult(result);
+        }
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        accessTokenTracker.stopTracking();
+        profileTracker.stopTracking();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Profile profile = Profile.getCurrentProfile();
     }
 }

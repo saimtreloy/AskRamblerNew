@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "218276925421",
+    "project_id": "ask-rambler-188206"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:218276925421:android:8855068f7633cfd3",
+        "android_client_info": {
+          "package_name": "saim.com.askrambler"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "218276925421-lgtkushdul4jsjh8u3e12pnus2dkkbsi.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "218276925421-haebctf5s41f8mcraeb8sh2nbr9561pc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "saim.com.askrambler",
+            "certificate_hash": "3bdcbda5d167acfb4a323197589dcad202867f8c"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDh_NTSvedCsjJFY1D_m8OxBqMiOgoKGs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
