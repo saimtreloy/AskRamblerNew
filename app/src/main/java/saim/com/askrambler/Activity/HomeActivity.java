@@ -38,6 +38,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -72,6 +74,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(this);
         setContentView(R.layout.activity_home);
 
         if (havePermission()){
@@ -230,7 +233,10 @@ public class HomeActivity extends AppCompatActivity {
                                 new SharedPrefDatabase(getApplicationContext()).StoreLogin("No");
                                 new SharedPrefDatabase(getApplicationContext()).StoreUserFullName("Guest User");
                                 new SharedPrefDatabase(getApplicationContext()).StoreUserPhoto("");
-                                new SharedPrefDatabase(getApplicationContext()).StoreSocialLogin(false);
+                                if (new SharedPrefDatabase(getApplicationContext()).RetriveSocialLogin() == true){
+                                    LoginManager.getInstance().logOut();
+                                    new SharedPrefDatabase(getApplicationContext()).StoreSocialLogin(false);
+                                }
                                 finish();
                                 startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                             }

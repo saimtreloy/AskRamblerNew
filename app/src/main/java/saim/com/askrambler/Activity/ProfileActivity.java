@@ -283,7 +283,7 @@ public class ProfileActivity extends AppCompatActivity {
             imgProfileImage.setImageResource(R.drawable.ic_person);
         }else {
             Glide.with(getApplicationContext())
-                    .load(Splash.user_photo).transform(new CircleTransform(getApplicationContext()))
+                    .load(new SharedPrefDatabase(getApplicationContext()).RetriveUserPhoto()).transform(new CircleTransform(getApplicationContext()))
                     .placeholder(R.drawable.ic_person)
                     .listener(new RequestListener<String, GlideDrawable>() {
                         @Override
@@ -299,7 +299,7 @@ public class ProfileActivity extends AppCompatActivity {
                     .into(imgProfileImage);
         }
         Log.d("SAIM DOCUMENT", Splash.document);
-        if (new SharedPrefDatabase(getApplicationContext()).RetriveUserPhoto().equals("http://askrambler.com/")){
+        if (Splash.document.equals("http://askrambler.com/")){
             imgProUploadDocument.setImageResource(R.drawable.ic_person);
         }else {
             Glide.with(getApplicationContext())
@@ -635,7 +635,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         ImageView img = (ImageView) chatDialogView.findViewById(R.id.imgDailogProfile);
         Glide.with(getApplicationContext())
-                .load(Splash.user_photo)
+                .load(new SharedPrefDatabase(getApplicationContext()).RetriveUserPhoto())
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
                     public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
