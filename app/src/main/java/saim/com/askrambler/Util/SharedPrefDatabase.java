@@ -13,6 +13,7 @@ public class SharedPrefDatabase {
     public static final String KEY_USER_PHOTO = "KEY_USER_PHOTO";
     public static final String KEY_LAT = "KEY_LAT";
     public static final String KEY_LON = "KEY_LON";
+    public static final String SOCIAL_LOGIN = "SOCIAL_LOGIN";
 
 
     SharedPreferences sharedPreferences;
@@ -85,6 +86,15 @@ public class SharedPrefDatabase {
     }
     public String RetriveLon(){
         String text = sharedPreferences.getString(KEY_LON, null);
+        return text;
+    }
+
+    public void StoreSocialLogin(Boolean data){
+        editor.putBoolean(SOCIAL_LOGIN, data);
+        editor.commit();
+    }
+    public Boolean RetriveSocialLogin(){
+        Boolean text = sharedPreferences.getBoolean(SOCIAL_LOGIN, false);
         return text;
     }
 }

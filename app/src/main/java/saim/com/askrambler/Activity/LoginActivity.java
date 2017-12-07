@@ -303,6 +303,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                 new SharedPrefDatabase(getApplicationContext()).StoreUserPassword(pass);
                                 new SharedPrefDatabase(getApplicationContext()).StoreUserFullName(Splash.full_name);
                                 new SharedPrefDatabase(getApplicationContext()).StoreUserPhoto(Splash.user_photo);
+                                new SharedPrefDatabase(getApplicationContext()).StoreSocialLogin(false);
 
                                 sendBroadcast(new Intent("com.synergyinterface.askrambler.Activity.ChangeLayoutOnLogin"));
                                 finish();
@@ -332,7 +333,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         stringRequest.setShouldCache(false);
         MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
     }
-
 
     public void UserRegistration(final String first_name, final String last_name, final String email, final String phone, final String password){
         StringRequest stringRequest = new StringRequest(Request.Method.POST, ApiURL.userRegistration,
@@ -434,9 +434,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         public void onCompleted(JSONObject object, GraphResponse response) {
                             Log.v("LoginActivity", response.toString());
 
-                            // Application code
                             try {
-                                Log.d("tttttt",object.getString("id"));
                                 String birthday="";
                                 if(object.has("birthday")){
                                     birthday = object.getString("birthday"); // 01/31/1980 format
@@ -450,7 +448,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                 String fbImage = "https://graph.facebook.com/"+fid+"/picture?type=large";
 
                                 Log.d("Saim FB Info", fnm + " " + lnm + "\n" + mail + "\n" + gender + "\n" + birthday + "\n" + fid + "\n" + fbImage);
-
+                                FacebookLogin(mail, fnm, lnm, gender, fid, fbImage);
 
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -522,7 +520,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
 
-    private void handleSignInResult(GoogleSignInResult result) {
+    private void handleSignInResult(GoogleSignInResult result)                                               {
         //If the login succeed
         if (result.isSuccess()) {
             //Getting google account
@@ -531,7 +529,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             //Displaying name and email
             String name = acct.getDisplayName();
             final String mail = acct.getEmail();
-            // String photourl = acct.getPhotoUrl().toString();
 
             final String givenname="",familyname="",displayname="",birthday="";
 
@@ -606,5 +603,95 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     public void onResume() {
         super.onResume();
         Profile profile = Profile.getCurrentProfile();
+    }
+
+
+    public void FacebookLogin(final String email, final String f_name, final String l_name, final String gender, final String id, final String photoURL) {
+        progressDialog.setMessage("Login please wait...");
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, ApiURL.facebookLogin,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+                        Log.d("SAIM RESPONSE", response);
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String code = jsonObject.getString("code");
+                            if (code.equals("success")){
+                                JSONArray jsonArray = jsonObject.getJSONArray("list");
+                                JSONObject jsonObjectList = jsonArray.getJSONObject(0);
+
+                                Splash.user_id = jsonObjectList.getString("user_id");
+                                Splash.nationality = jsonObjectList.getString("nationality");
+                                Splash.full_name = jsonObjectList.getString("full_name");
+                                Splash.email = jsonObjectList.getString("email");
+                                Splash.password = jsonObjectList.getString("password");
+                                Splash.agreement = jsonObjectList.getString("agreement");
+                                Splash.status = jsonObjectList.getString("status");
+                                Splash.roll = jsonObjectList.getString("roll");
+                                Splash.first_name = jsonObjectList.getString("first_name");
+                                Splash.last_name = jsonObjectList.getString("last_name");
+                                Splash.gander = jsonObjectList.getString("gander");
+                                Splash.address = jsonObjectList.getString("address");
+                                Splash.city = jsonObjectList.getString("city");
+                                Splash.zip = jsonObjectList.getString("zip");
+                                Splash.state = jsonObjectList.getString("state");
+                                Splash.country = jsonObjectList.getString("country");
+                                Splash.mobile = jsonObjectList.getString("mobile");
+                                Splash.phone = jsonObjectList.getString("phone");
+                                Splash.birth_date = jsonObjectList.getString("birth_date");
+                                Splash.user_photo = jsonObjectList.getString("user_photo");
+                                Splash.document = jsonObjectList.getString("document");
+                                Splash.verify = jsonObjectList.getString("verify");
+                                Splash.website = jsonObjectList.getString("website");
+                                Splash.facebook = jsonObjectList.getString("facebook");
+                                Splash.instagram = jsonObjectList.getString("instagram");
+                                Splash.youtube = jsonObjectList.getString("youtube");
+                                Splash.code1 = jsonObjectList.getString("code");
+                                Splash.cornjob = jsonObjectList.getString("cornjob");
+                                Splash.like_to = jsonObjectList.getString("like_to");
+                                Splash.details = jsonObjectList.getString("details");
+                                Splash.server_date = jsonObjectList.getString("server_date");
+
+                                new SharedPrefDatabase(getApplicationContext()).StoreLogin("Yes");
+                                new SharedPrefDatabase(getApplicationContext()).StoreSocialLogin(true);
+                                new SharedPrefDatabase(getApplicationContext()).StoreUserEmail(email);
+                                new SharedPrefDatabase(getApplicationContext()).StoreUserPassword(id);
+                                new SharedPrefDatabase(getApplicationContext()).StoreUserFullName(Splash.full_name);
+                                new SharedPrefDatabase(getApplicationContext()).StoreUserPhoto(photoURL);
+                                Splash.user_photo = photoURL;
+
+                                sendBroadcast(new Intent("com.synergyinterface.askrambler.Activity.ChangeLayoutOnLogin"));
+                                finish();
+                            }else {
+                                String message = jsonObject.getString("message");
+                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                            }
+                        }catch (Exception e){
+                            Log.d("HDHD 1", e.toString() + "\n" + response);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("email", email);
+                params.put("f_name", f_name);
+                params.put("l_name", l_name);
+                params.put("gender", gender);
+                params.put("id", id);
+
+                return params;
+            }
+        };
+        stringRequest.setShouldCache(false);
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
     }
 }

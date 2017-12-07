@@ -66,6 +66,7 @@ public class Splash extends AppCompatActivity {
         SaveGetAllPost();
     }
 
+
     public void SaveGetAllPost() {
         modelPostsList.clear();
         StringRequest stringRequest = new StringRequest(Request.Method.GET, ApiURL.getAllPostShort,
@@ -92,18 +93,6 @@ public class Splash extends AppCompatActivity {
                                     ModelPostShort modelPostShort = new ModelPostShort(ads_id, to_where, to_date,ad_type, details, full_name, user_photo);
                                     modelPostsList.add(modelPostShort);
                                 }
-
-                                /*if (new SharedPrefDatabase(getApplicationContext()).RetriveLogin() != null){
-                                    if (new SharedPrefDatabase(getApplicationContext()).RetriveLogin().equals("Yes")){
-                                        SaveUserLogin();
-                                    }else if (new SharedPrefDatabase(getApplicationContext()).RetriveLogin().equals("No")){
-                                        startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-                                        finish();
-                                    }
-                                }else {
-                                    startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-                                    finish();
-                                }*/
 
                                 SaveGetAllLocationInformation();
 
@@ -176,7 +165,9 @@ public class Splash extends AppCompatActivity {
 
                                 new SharedPrefDatabase(getApplicationContext()).StoreLogin("Yes");
                                 new SharedPrefDatabase(getApplicationContext()).StoreUserFullName(full_name);
-                                new SharedPrefDatabase(getApplicationContext()).StoreUserPhoto(user_photo);
+                                if (new SharedPrefDatabase(getApplicationContext()).RetriveSocialLogin() == false){
+                                    new SharedPrefDatabase(getApplicationContext()).StoreUserPhoto(user_photo);
+                                }
 
                                 startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                                 finish();

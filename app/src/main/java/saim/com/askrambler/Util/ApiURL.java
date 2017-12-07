@@ -39,4 +39,9 @@ public class ApiURL {
 
 
     public static String locationInformation = "http://askrambler.com/Android_API/getAllLatLon.php";
+
+
+    //Social Login
+    public static String facebookLogin = "http://askrambler.com/Android_API/loginFacebook.php";
+    public static String googleLogin = "http://askrambler.com/Android_API/loginGoogle.php";
 }

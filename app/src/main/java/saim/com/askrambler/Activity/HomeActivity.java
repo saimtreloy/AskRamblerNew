@@ -184,11 +184,12 @@ public class HomeActivity extends AppCompatActivity {
         Log.d("SAIM INFO CHECK", new SharedPrefDatabase(getApplicationContext()).RetriveUserFullName() + "\n" +
                 new SharedPrefDatabase(getApplicationContext()).RetriveUserPhoto());
 
-        if (Splash.user_photo.equals("http://askrambler.com/")){
+        Log.d("SAIM PHOTO URL", new SharedPrefDatabase(getApplicationContext()).RetriveUserPhoto() +"");
+        if (new SharedPrefDatabase(getApplicationContext()).RetriveUserPhoto().equals("http://askrambler.com/")){
             imageViewHeader.setImageResource(R.drawable.ic_person);
-        }else {
+        } else {
             Glide.with(getApplicationContext())
-                    .load(new SharedPrefDatabase(getApplicationContext()).RetriveUserPhoto()).transform(new CircleTransform(getApplicationContext()))
+                    .load(new SharedPrefDatabase(getApplicationContext()).RetriveUserPhoto()+"").transform(new CircleTransform(getApplicationContext()))
                     .placeholder(R.drawable.ic_person)
                     .listener(new RequestListener<String, GlideDrawable>() {
                         @Override
@@ -229,6 +230,7 @@ public class HomeActivity extends AppCompatActivity {
                                 new SharedPrefDatabase(getApplicationContext()).StoreLogin("No");
                                 new SharedPrefDatabase(getApplicationContext()).StoreUserFullName("Guest User");
                                 new SharedPrefDatabase(getApplicationContext()).StoreUserPhoto("");
+                                new SharedPrefDatabase(getApplicationContext()).StoreSocialLogin(false);
                                 finish();
                                 startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                             }

@@ -279,7 +279,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void PopulateProfileInformation(){
         Log.d("SAIM TRELOY", Splash.user_photo);
-        if (Splash.user_photo.equals("http://askrambler.com/")){
+        if (new SharedPrefDatabase(getApplicationContext()).RetriveUserPhoto().equals("http://askrambler.com/")){
             imgProfileImage.setImageResource(R.drawable.ic_person);
         }else {
             Glide.with(getApplicationContext())
@@ -299,7 +299,7 @@ public class ProfileActivity extends AppCompatActivity {
                     .into(imgProfileImage);
         }
         Log.d("SAIM DOCUMENT", Splash.document);
-        if (Splash.document.equals("http://askrambler.com/")){
+        if (new SharedPrefDatabase(getApplicationContext()).RetriveUserPhoto().equals("http://askrambler.com/")){
             imgProUploadDocument.setImageResource(R.drawable.ic_person);
         }else {
             Glide.with(getApplicationContext())
@@ -345,9 +345,9 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void showGenderList(String title, final EditText editText) {
 
-        LayoutInflater factory = LayoutInflater.from(getApplicationContext());
+        LayoutInflater factory = LayoutInflater.from(ProfileActivity.this);
         final View infoDialogView = factory.inflate(R.layout.dialog_list, null);
-        final AlertDialog infoDialog = new AlertDialog.Builder(getApplicationContext()).create();
+        final AlertDialog infoDialog = new AlertDialog.Builder(ProfileActivity.this).create();
         infoDialog.setView(infoDialogView);
         infoDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -370,7 +370,7 @@ public class ProfileActivity extends AppCompatActivity {
     public void dateSelectFromDatePicker(final EditText editText) {
         Calendar newCalendar = Calendar.getInstance();
         final SimpleDateFormat dateFormatter = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
-        final DatePickerDialog datePickerDialog = new DatePickerDialog(getApplicationContext(), new DatePickerDialog.OnDateSetListener() {
+        final DatePickerDialog datePickerDialog = new DatePickerDialog(ProfileActivity.this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
@@ -388,9 +388,9 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void showCountryList(String title, final EditText editText) {
 
-        LayoutInflater factory = LayoutInflater.from(getApplicationContext());
+        LayoutInflater factory = LayoutInflater.from(ProfileActivity.this);
         final View infoDialogView = factory.inflate(R.layout.dialog_list, null);
-        final AlertDialog infoDialog = new AlertDialog.Builder(getApplicationContext()).create();
+        final AlertDialog infoDialog = new AlertDialog.Builder(ProfileActivity.this).create();
         infoDialog.setView(infoDialogView);
         infoDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -626,9 +626,9 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void showChatDialogInfo() {
 
-        LayoutInflater factory = LayoutInflater.from(getApplicationContext());
+        LayoutInflater factory = LayoutInflater.from(ProfileActivity.this);
         final View chatDialogView = factory.inflate(R.layout.dialog_profile, null);
-        final AlertDialog chatDialog = new AlertDialog.Builder(getApplicationContext()).create();
+        final AlertDialog chatDialog = new AlertDialog.Builder(ProfileActivity.this).create();
         chatDialog.setView(chatDialogView);
         chatDialog.setCanceledOnTouchOutside(false);
         chatDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
