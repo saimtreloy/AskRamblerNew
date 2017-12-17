@@ -40,6 +40,13 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.plus.Plus;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -70,6 +77,9 @@ public class HomeActivity extends AppCompatActivity {
     RecyclerView.Adapter allPostAdapter;
 
     Button btnFabCreatePost;
+
+    private GoogleSignInOptions gso;
+    private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,6 +139,20 @@ public class HomeActivity extends AppCompatActivity {
                 }
             }
         });
+
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, new GoogleApiClient.OnConnectionFailedListener() {
+                    @Override
+                    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+                        Toast.makeText(getApplicationContext(), "Connection Failed!", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .addApi(Plus.API)
+                .build();
     }
 
 
@@ -235,6 +259,13 @@ public class HomeActivity extends AppCompatActivity {
                                 new SharedPrefDatabase(getApplicationContext()).StoreUserPhoto("");
                                 if (new SharedPrefDatabase(getApplicationContext()).RetriveSocialLogin() == true){
                                     LoginManager.getInstance().logOut();
+                                    Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
+                                            new ResultCallback<Status>() {
+                                                @Override
+                                                public void onResult(Status status) {
+                                                    Toast.makeText(HomeActivity.this, "Logout Successfully!", Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
                                     new SharedPrefDatabase(getApplicationContext()).StoreSocialLogin(false);
                                 }
                                 finish();
@@ -265,12 +296,22 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (getSupportFragmentManager().getBackStackEntryCount() == 1){
-            toolbar.setTitle(getResources().getString(R.string.app_name));
-            super.onBackPressed();
-        }else {
-            super.onBackPressed();
-        }
+        new AwesomeWarningDialog(this)
+                .setTitle("Close")
+                .setMessage("Are you sure want to close this app?")
+                .setColoredCircle(R.color.dialogErrorBackgroundColor)
+                .setDialogIconAndColor(R.drawable.ic_dialog_error, R.color.white)
+                .setCancelable(true)
+                .setButtonText(getString(R.string.dialog_ok_button))
+                .setButtonBackgroundColor(R.color.dialogErrorBackgroundColor)
+                .setButtonText(getString(R.string.dialog_ok_button))
+                .setWarningButtonClick(new Closure() {
+                    @Override
+                    public void exec() {
+                        finish();
+                    }
+                })
+                .show();
     }
 
     public BroadcastReceiver receiverChangeLayoutOnLogin = new BroadcastReceiver() {

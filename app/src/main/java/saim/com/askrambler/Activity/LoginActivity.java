@@ -520,7 +520,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
 
-    private void handleSignInResult(GoogleSignInResult result)                                               {
+    private void handleSignInResult(GoogleSignInResult result) {
         //If the login succeed
         if (result.isSuccess()) {
             //Getting google account
@@ -530,38 +530,13 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             String name = acct.getDisplayName();
             final String mail = acct.getEmail();
 
-            final String givenname="",familyname="",displayname="",birthday="";
+            String fnm = acct.getGivenName();
+            String lnm = acct.getFamilyName();
+            String gid = acct.getId();
+            String gImage = acct.getPhotoUrl().toString();
 
-            Plus.PeopleApi.load(mGoogleApiClient, acct.getId()).setResultCallback(new ResultCallback<People.LoadPeopleResult>() {
-                @Override
-                public void onResult(@NonNull People.LoadPeopleResult loadPeopleResult) {
-                    Person person = loadPeopleResult.getPersonBuffer().get(0);
+            FacebookLogin(mail, fnm, lnm, "Male", gid, gImage);
 
-                    Log.d("GivenName ", person.getName().getGivenName());
-                    Log.d("FamilyName ",person.getName().getFamilyName());
-                    Log.d("DisplayName ",person.getDisplayName());
-                    Log.d("gender ", String.valueOf(person.getGender())); //0 = male 1 = female
-                    String gender="";
-                    if(person.getGender() == 0){
-                        gender = "Male";
-                    }else {
-                        gender = "Female";
-                    }
-
-                    if(person.hasBirthday()){
-                        //tv.setText(person.getName().getGivenName()+" \n"+person.getName().getFamilyName()+" \n"+gender+"\n"+person.getBirthday());
-                        Log.d("SAIM GOOGLE SIGN IN", person.getName().getGivenName()+" \n"+person.getName().getFamilyName()+" \n"+gender+"\n"+person.getBirthday() + "\n" + person.getImage().getUrl() +"\n"+ acct.getEmail());
-                    }else {
-                        Log.d("SAIM GOOGLE SIGN IN", person.getName().getGivenName() + " \n" + person.getName().getFamilyName() + " \n" + gender + "\n" + person.getImage().getUrl() +"\n"+ acct.getEmail());
-                    }
-                    //aQuery.id(iv).image(acct.getPhotoUrl().toString());
-                    //Log.d("Uriddd",acct.getPhotoUrl().toString());
-                    //Log.d(TAG,"CurrentLocation "+person.getCurrentLocation());
-                    //Log.d(TAG,"AboutMe "+person.getAboutMe());
-                    //Log.d("Birthday ",person.getBirthday());
-                    //Log.d(TAG,"Image "+person.getImage());
-                }
-            });
         } else {
             //If login fails
             Toast.makeText(this, "Login Failed", Toast.LENGTH_LONG).show();

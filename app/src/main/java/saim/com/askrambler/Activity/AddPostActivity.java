@@ -82,7 +82,8 @@ public class AddPostActivity extends AppCompatActivity {
     private static final String PLACES_API_BASE = "https://maps.googleapis.com/maps/api/place";
     private static final String TYPE_AUTOCOMPLETE = "/autocomplete";
     private static final String OUT_JSON = "/json";
-    private static final String API_KEY = "AIzaSyCBrJXQuoQXATq461rT-WoaO5Sd0c9aqTQ";
+    private static final String API_KEY = "AIzaSyCMDHpZK9wLjICfQbv9ioQy1bqWo255E0U";
+    public static final String PLACE_API_FULL_LINK = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=" + API_KEY + "&input=";
     private static final int PICK_IMAGE_REQUEST=1001;
 
 
@@ -422,10 +423,8 @@ public class AddPostActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.toString().length() <= 3) {
-                    resultList = new ArrayList<String>();
-                    SaveFutureProject(s.toString(), inputAddComFrom);
-                }
+                resultList = new ArrayList<String>();
+                SaveFutureProject(s.toString(), inputAddComFrom);
             }
         });
         inputAddComTo.addTextChangedListener(new TextWatcher() {
@@ -441,10 +440,8 @@ public class AddPostActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.toString().length() <= 3) {
-                    resultList = new ArrayList<String>();
-                    SaveFutureProject(s.toString(), inputAddComTo);
-                }
+                resultList = new ArrayList<String>();
+                SaveFutureProject(s.toString(), inputAddComTo);
             }
         });
         inputAddConExpectedDate.setOnClickListener(new View.OnClickListener() {
@@ -535,10 +532,8 @@ public class AddPostActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.toString().length() <= 3) {
-                    resultList = new ArrayList<String>();
-                    SaveFutureProject(s.toString(), inputAddBagFrom);
-                }
+                resultList = new ArrayList<String>();
+                SaveFutureProject(s.toString(), inputAddBagFrom);
             }
         });
         inputAddBagTo.addTextChangedListener(new TextWatcher() {
@@ -554,10 +549,8 @@ public class AddPostActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.toString().length() <= 3) {
-                    resultList = new ArrayList<String>();
-                    SaveFutureProject(s.toString(), inputAddBagTo);
-                }
+                resultList = new ArrayList<String>();
+                SaveFutureProject(s.toString(), inputAddBagTo);
             }
         });
 
@@ -666,10 +659,8 @@ public class AddPostActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.toString().length() <= 3) {
-                    resultList = new ArrayList<String>();
-                    SaveFutureProject(s.toString(), inputAddTripFrom);
-                }
+                resultList = new ArrayList<String>();
+                SaveFutureProject(s.toString(), inputAddTripFrom);
             }
         });
         inputAddTripTo.addTextChangedListener(new TextWatcher() {
@@ -685,10 +676,8 @@ public class AddPostActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.toString().length() <= 3) {
-                    resultList = new ArrayList<String>();
-                    SaveFutureProject(s.toString(), inputAddTripTo);
-                }
+                resultList = new ArrayList<String>();
+                SaveFutureProject(s.toString(), inputAddTripTo);
             }
         });
 
@@ -806,10 +795,8 @@ public class AddPostActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.toString().length() <= 3) {
-                    resultList = new ArrayList<String>();
-                    SaveFutureProject(s.toString(), inputAddHostLocation);
-                }
+                resultList = new ArrayList<String>();
+                SaveFutureProject(s.toString(), inputAddHostLocation);
             }
         });
 
@@ -933,7 +920,9 @@ public class AddPostActivity extends AppCompatActivity {
 
     //Google Autocomplete  Adapter
     public ArrayList SaveFutureProject(String place, final AutoCompleteTextView auto) {
-        String url = PLACES_API_BASE + TYPE_AUTOCOMPLETE + OUT_JSON + "?key=" + API_KEY + "&components=country:bd" + "&input=" + place;
+        //String url = PLACES_API_BASE + TYPE_AUTOCOMPLETE + OUT_JSON + "?key=" + API_KEY + "&components=country:bd" + "&input=" + place;
+        String url = PLACE_API_FULL_LINK + place;
+        url = url.replace(" ", "%20");
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override

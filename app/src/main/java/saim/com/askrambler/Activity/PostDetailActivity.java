@@ -1,6 +1,8 @@
 package saim.com.askrambler.Activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -138,6 +140,14 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
 
 
         SaveGetPostInformation();
+
+
+        txtPDUserEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendEmail(txtPDUserEmail.getText().toString().trim());
+            }
+        });
     }
 
     public void PopulateInformationCompanion(){
@@ -426,5 +436,25 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
         });
         stringRequest.setShouldCache(false);
         MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+    }
+
+
+    protected void sendEmail(String mail) {
+        String[] TO = {mail};
+        String[] CC = {""};
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+
+        emailIntent.setData(Uri.parse("mailto:"));
+        emailIntent.setType("text/plain");
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+        emailIntent.putExtra(Intent.EXTRA_CC, CC);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Ask Rambler");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "");
+
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(PostDetailActivity.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
+        }
     }
 }
