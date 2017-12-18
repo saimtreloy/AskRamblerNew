@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -193,6 +194,30 @@ public class HomeActivity extends AppCompatActivity {
                     drawerLayout.closeDrawers();
                 }
                 return false;
+            }
+        });
+
+
+        TextView txtTarmsAndUse = (TextView) findViewById(R.id.txtTarmsAndUse);
+        TextView txtPrivacyPolicy = (TextView) findViewById(R.id.txtPrivacyPolicy);
+
+        txtTarmsAndUse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse("http://askrambler.com/ask/terms_condition");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+                drawerLayout.closeDrawers();
+            }
+        });
+
+        txtPrivacyPolicy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse("http://askrambler.com/ask/privacy");
+                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(intent);
+                drawerLayout.closeDrawers();
             }
         });
     }

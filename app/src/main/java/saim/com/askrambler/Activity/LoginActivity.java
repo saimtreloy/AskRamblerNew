@@ -43,10 +43,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiActivity;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.plus.People;
 import com.google.android.gms.plus.Plus;
+import com.google.android.gms.plus.PlusShare;
 import com.google.android.gms.plus.model.people.Person;
 
 import org.json.JSONArray;
@@ -250,7 +252,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         });
 
     }
-
 
     public void SaveUserLogin(final String email, final String pass) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, ApiURL.getLogin,
@@ -498,10 +499,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 .requestEmail()
                 .build();
         mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .enableAutoManage(this , this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .addApi(Plus.API)
                 .build();
+
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -510,6 +511,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 startActivityForResult(signInIntent, SIGN_IN);
             }
         });
+
         gp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

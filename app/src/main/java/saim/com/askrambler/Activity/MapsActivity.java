@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -24,6 +25,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -90,9 +93,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             Log.d("SAIM LOCATION", latitude + " " + longitude);
             LatLng sydney = new LatLng(latitude, longitude);
             CameraUpdate center = CameraUpdateFactory.newLatLng(sydney);
-            CameraUpdate zoom = CameraUpdateFactory.newLatLngZoom(sydney,7);
+            CameraUpdate zoom = CameraUpdateFactory.newLatLngZoom(sydney,12);
             mMap.moveCamera(center);
             mMap.animateCamera(zoom);
+
+            Circle circle = mMap.addCircle(new CircleOptions()
+                    .center(sydney)
+                    .radius(2000)
+                    .strokeColor(0x220000FF)
+                    .fillColor(0x220000FF));
 
             Drawable dPersonal = getResources().getDrawable(R.drawable.ic_map_person);
             BitmapDescriptor markerIconP = getMarkerIconFromDrawable(dPersonal);

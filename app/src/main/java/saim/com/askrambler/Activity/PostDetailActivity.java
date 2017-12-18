@@ -137,8 +137,6 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
         txtPDTripType = (TextView) findViewById(R.id.txtPDTripType);
         txtPDTripDuration = (TextView) findViewById(R.id.txtPDTripDuration);
 
-
-
         SaveGetPostInformation();
 
 
@@ -146,6 +144,14 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
             @Override
             public void onClick(View v) {
                 sendEmail(txtPDUserEmail.getText().toString().trim());
+            }
+        });
+
+        txtPDUserPhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(android.content.Intent.ACTION_DIAL, Uri.parse("tel:"+txtPDUserPhone.getText().toString()));
+                startActivity(intent);
             }
         });
     }
