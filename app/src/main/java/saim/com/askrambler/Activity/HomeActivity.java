@@ -100,6 +100,8 @@ public class HomeActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbarHome);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         progressDialog = new ProgressDialog(this);
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);

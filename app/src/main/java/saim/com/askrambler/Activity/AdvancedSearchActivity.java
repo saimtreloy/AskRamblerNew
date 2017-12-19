@@ -14,6 +14,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -99,6 +100,8 @@ public class AdvancedSearchActivity extends AppCompatActivity {
         toolbarAdvancedSearch = (Toolbar) findViewById(R.id.toolbarAdvancedSearch);
         toolbarAdvancedSearch.setTitle("Advance Search");
         setSupportActionBar(toolbarAdvancedSearch);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
@@ -803,5 +806,17 @@ public class AdvancedSearchActivity extends AppCompatActivity {
             }
         });
         infoDialog.show();
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        if (id==android.R.id.home) {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

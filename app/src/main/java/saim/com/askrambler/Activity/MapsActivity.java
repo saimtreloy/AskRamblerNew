@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -67,6 +68,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         toolbarMaps = (Toolbar) findViewById(R.id.toolbarMaps);
         toolbarMaps.setTitle("Nearest Host");
         setSupportActionBar(toolbarMaps);
+
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading please wait...!");
@@ -158,5 +162,17 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
         drawable.draw(canvas);
         return BitmapDescriptorFactory.fromBitmap(bitmap);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        if (id==android.R.id.home) {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

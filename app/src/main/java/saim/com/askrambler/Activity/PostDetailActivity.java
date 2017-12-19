@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -82,6 +83,8 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
         toolbarPostDetail = (Toolbar) findViewById(R.id.toolbarPostDetail);
         toolbarPostDetail.setTitle("Post Detail");
         setSupportActionBar(toolbarPostDetail);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait data is loading...");
@@ -462,5 +465,16 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
         } catch (android.content.ActivityNotFoundException ex) {
             Toast.makeText(PostDetailActivity.this, "There is no email client installed.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        if (id==android.R.id.home) {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

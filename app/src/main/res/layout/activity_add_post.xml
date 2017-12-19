@@ -18,7 +18,12 @@
         android:layout_height="56dp"
         android:background="@color/colorAccent"
         android:fitsSystemWindows="true"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:contentInsetEnd="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"/>
 
     <android.support.v7.widget.CardView
         android:id="@+id/cardLogin"

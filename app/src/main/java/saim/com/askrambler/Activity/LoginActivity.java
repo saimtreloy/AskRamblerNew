@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -112,6 +113,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         toolbarLogin = (Toolbar) findViewById(R.id.toolbarLogin);
         toolbarLogin.setTitle("User Login");
         setSupportActionBar(toolbarLogin);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
@@ -670,5 +673,17 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         };
         stringRequest.setShouldCache(false);
         MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        if (id==android.R.id.home) {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

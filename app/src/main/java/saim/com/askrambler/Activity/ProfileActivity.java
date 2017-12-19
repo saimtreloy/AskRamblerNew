@@ -18,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -90,6 +91,7 @@ public class ProfileActivity extends AppCompatActivity {
         toolbarProfile = (Toolbar) findViewById(R.id.toolbarProfile);
         toolbarProfile.setTitle("Profile");
         setSupportActionBar(toolbarProfile);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
@@ -830,5 +832,17 @@ public class ProfileActivity extends AppCompatActivity {
         });
         stringRequest.setShouldCache(false);
         MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        if (id==android.R.id.home) {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

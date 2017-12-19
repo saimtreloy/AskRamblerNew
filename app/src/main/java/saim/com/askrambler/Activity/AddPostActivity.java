@@ -25,6 +25,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -141,6 +142,8 @@ public class AddPostActivity extends AppCompatActivity {
         toolbarAddPost = (Toolbar) findViewById(R.id.toolbarAddPost);
         toolbarAddPost.setTitle("Create new post");
         setSupportActionBar(toolbarAddPost);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
@@ -1537,5 +1540,16 @@ public class AddPostActivity extends AppCompatActivity {
     }
 
 
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        if (id==android.R.id.home) {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
 }

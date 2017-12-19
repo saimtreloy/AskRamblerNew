@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -54,6 +55,7 @@ public class SearchResultActivity extends AppCompatActivity {
         toolbarSearchResult = (Toolbar) findViewById(R.id.toolbarSearchResult);
         toolbarSearchResult.setTitle("Search Result");
         setSupportActionBar(toolbarSearchResult);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait...");
@@ -364,5 +366,17 @@ public class SearchResultActivity extends AppCompatActivity {
         stringRequest.setShouldCache(false);
         MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
 
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        if (id==android.R.id.home) {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
