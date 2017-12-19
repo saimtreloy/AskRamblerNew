@@ -222,9 +222,10 @@ public class Splash extends AppCompatActivity {
                                     String payment_category = jsonObjectList.getString("payment_category");
                                     String isType = jsonObjectList.getString("isType");
                                     String location = jsonObjectList.getString("location");
+                                    String userName = jsonObjectList.getString("userName");
 
 
-                                    ModelLocation modelLocation = new ModelLocation(ads_id, post_user_id, lat, lon, payment_category, isType, location);
+                                    ModelLocation modelLocation = new ModelLocation(ads_id, post_user_id, lat, lon, payment_category, isType, location, userName);
                                     modelLocationList.add(modelLocation);
                                 }
                                 if (new SharedPrefDatabase(getApplicationContext()).RetriveLogin() != null){

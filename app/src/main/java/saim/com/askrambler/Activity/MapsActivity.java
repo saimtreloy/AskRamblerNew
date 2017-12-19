@@ -120,13 +120,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 double lt = Double.parseDouble(Splash.modelLocationList.get(i).getLat());
                 double ln = Double.parseDouble(Splash.modelLocationList.get(i).getLon());
                 LatLng latLng = new LatLng(lt, ln);
-                String postTitle = Splash.modelLocationList.get(i).getAds_id();
+                String postTitle = Splash.modelLocationList.get(i).getUserName();
                 String postMessage = Splash.modelLocationList.get(i).getIsType();
 
                 Drawable dHost = getResources().getDrawable(R.drawable.ic_map_host);
                 BitmapDescriptor markerIcon = getMarkerIconFromDrawable(dHost);
 
                 myMarker = mMap.addMarker(new MarkerOptions().position(latLng).title(postTitle).snippet(postMessage).icon(markerIcon));
+                myMarker.setTag(Splash.modelLocationList.get(i).getAds_id());
             }
 
             mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
@@ -135,7 +136,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
                     if (!marker.getTitle().equals("My Spot")){
                         Intent i = new Intent(getApplicationContext(), PostDetailActivity.class);
-                        i.putExtra("POST_ID", marker.getTitle().trim());
+                        i.putExtra("POST_ID", marker.getTag().toString().trim());
                         startActivity(i);
                     }
                 }

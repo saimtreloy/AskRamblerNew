@@ -5,9 +5,9 @@ package saim.com.askrambler.Model;
  */
 
 public class ModelLocation {
-    String ads_id, post_user_id, lat, lon, payment_category, isType, location;
+    String ads_id, post_user_id, lat, lon, payment_category, isType, location, userName;
 
-    public ModelLocation(String ads_id, String post_user_id, String lat, String lon, String payment_category, String isType, String location) {
+    public ModelLocation(String ads_id, String post_user_id, String lat, String lon, String payment_category, String isType, String location, String userName) {
         this.ads_id = ads_id;
         this.post_user_id = post_user_id;
         this.lat = lat;
@@ -15,6 +15,7 @@ public class ModelLocation {
         this.payment_category = payment_category;
         this.isType = isType;
         this.location = location;
+        this.userName = userName;
     }
 
     public String getAds_id() {
@@ -43,5 +44,9 @@ public class ModelLocation {
 
     public String getLocation() {
         return location;
+    }
+
+    public String getUserName() {
+        return userName;
     }
 }

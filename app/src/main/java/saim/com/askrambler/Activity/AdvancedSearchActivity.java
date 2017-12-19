@@ -4,11 +4,11 @@ import android.animation.Animator;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -53,11 +53,8 @@ public class AdvancedSearchActivity extends AppCompatActivity {
 
     Toolbar toolbarAdvancedSearch;
 
-    private static final String LOG_TAG = "Google Places Autocomplete";
-    private static final String PLACES_API_BASE = "https://maps.googleapis.com/maps/api/place";
-    private static final String TYPE_AUTOCOMPLETE = "/autocomplete";
-    private static final String OUT_JSON = "/json";
-    private static final String API_KEY = "AIzaSyCBrJXQuoQXATq461rT-WoaO5Sd0c9aqTQ";
+    private static final String API_KEY = "AIzaSyCMDHpZK9wLjICfQbv9ioQy1bqWo255E0U";
+    public static final String PLACE_API_FULL_LINK = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=" + API_KEY + "&input=";
 
     Button btnSPostCom, btnSPostBag, btnSPostTrip, btnSPostHost;
     RelativeLayout layoutSPostCompanion, layoutSPostBaggage, layoutSPostTrip, layoutSPostHost;
@@ -646,8 +643,8 @@ public class AdvancedSearchActivity extends AppCompatActivity {
 
     //Google Autocomplete  Adapter
     public ArrayList SaveFutureProject(String place, final AutoCompleteTextView auto) {
-        //String url = PLACES_API_BASE + TYPE_AUTOCOMPLETE + OUT_JSON + "?key=" + API_KEY + "&components=country:bd" + "&input=" + place;
-        String url = PLACES_API_BASE + TYPE_AUTOCOMPLETE + OUT_JSON + "?key=" + API_KEY  + "&input=" + place + "&types=geocode";
+        String url = PLACE_API_FULL_LINK + place;
+        url = url.replace(" ", "%20");
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
@@ -663,7 +660,7 @@ public class AdvancedSearchActivity extends AppCompatActivity {
                                 System.out.println("============================================================");
                                 resultList.add(predsJsonArray.getJSONObject(i).getString("description"));
                             }
-                            adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, resultList) {
+                            adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, resultList){
                                 @NonNull
                                 @Override
                                 public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -679,7 +676,7 @@ public class AdvancedSearchActivity extends AppCompatActivity {
                             };
                             auto.setAdapter(adapter);
                             adapter.notifyDataSetChanged();
-                        } catch (Exception e) {
+                        }catch (Exception e){
 
                         }
                     }

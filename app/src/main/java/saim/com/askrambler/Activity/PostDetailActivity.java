@@ -55,7 +55,7 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
     String from_where, to_where, from_date, to_date, payment_category, gender, traveling_by, isType,
             baggage_type, baggage_weight, trip_category, trip_category_id, transport_type, trip_duration,
             location, travelers, offers_1, offers_2, offers_3, smoking_habit, alcohol_habit, images,
-            contacts, details, ad_type, ad_type_id, date, status, user_id, user_photo, vote_count, user_name, user_email, user_phone, user_verify;
+            contacts, details, ad_type, ad_type_id, date, status, user_id, user_photo, vote_count, user_name, user_email, user_phone, user_verify, rateing;
 
     public LinearLayout layoutDetailCompanion, layoutDetailBaggage, layoutDetailTrip, layoutDetailHost;
     public TextView txtPDDetail, txtPDLocation, txtPDService, txtPDHost, txtPDTraveler, txtPDOffering,
@@ -67,7 +67,9 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
     //Baggage Textview
     public TextView txtPDTripDestination, txtPDTripTravelDate, txtPDTripServiceType, txtPDTripTrip, txtPDTripCategory, txtPDTripType, txtPDTripDuration;
     public ImageView imgPDStatus, imgPDUser;
+
     public RatingBar ratingBar;
+    public TextView txtRateing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,6 +142,9 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
         txtPDTripType = (TextView) findViewById(R.id.txtPDTripType);
         txtPDTripDuration = (TextView) findViewById(R.id.txtPDTripDuration);
 
+        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+        txtRateing = (TextView) findViewById(R.id.txtRateing);
+
         SaveGetPostInformation();
 
 
@@ -192,6 +197,8 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
                     }
                 })
                 .into(imgPDUser);
+
+
     }
 
     public void PopulateInformationBaggage(){
@@ -406,6 +413,7 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
                                 user_email = jsonObjectList.getString("user_email");
                                 user_phone = jsonObjectList.getString("user_phone");
                                 user_verify = jsonObjectList.getString("user_verify");
+                                rateing = jsonObjectList.getString("rateing");
                             }
                             PopulateSlider();
                             if (ad_type.equals("Companion")){
@@ -433,6 +441,17 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
                                 layoutDetailHost.setVisibility(View.GONE);
                                 PopulateInformationTrip();
                             }
+
+                            if (!rateing.equals("null")){
+                                txtRateing.setText("Rate: "+rateing);
+                                float rate = Float.parseFloat(rateing);
+                                ratingBar.setRating(rate);
+                            }else {
+                                txtRateing.setText("Rate: 0.0");
+                                float rate = Float.parseFloat("0.0");
+                                ratingBar.setRating(rate);
+                            }
+
                         } catch (Exception e) {
 
                         }

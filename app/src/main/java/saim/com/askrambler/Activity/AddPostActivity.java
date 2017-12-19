@@ -15,7 +15,6 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -25,7 +24,6 @@ import android.util.Base64;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -37,7 +35,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
@@ -78,14 +75,8 @@ public class AddPostActivity extends AppCompatActivity {
 
     Toolbar toolbarAddPost;
 
-
-    private static final String LOG_TAG = "Google Places Autocomplete";
-    private static final String PLACES_API_BASE = "https://maps.googleapis.com/maps/api/place";
-    private static final String TYPE_AUTOCOMPLETE = "/autocomplete";
-    private static final String OUT_JSON = "/json";
     private static final String API_KEY = "AIzaSyCMDHpZK9wLjICfQbv9ioQy1bqWo255E0U";
     public static final String PLACE_API_FULL_LINK = "https://maps.googleapis.com/maps/api/place/autocomplete/json?key=" + API_KEY + "&input=";
-    private static final int PICK_IMAGE_REQUEST=1001;
 
 
     android.support.v4.app.FragmentTransaction fragmentTransaction;
@@ -1541,15 +1532,6 @@ public class AddPostActivity extends AppCompatActivity {
 
 
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
 
-        int id = item.getItemId();
-        if (id==android.R.id.home) {
-            finish();
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
 }

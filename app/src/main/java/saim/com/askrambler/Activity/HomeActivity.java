@@ -194,6 +194,9 @@ public class HomeActivity extends AppCompatActivity {
                 } else if (item.getItemId() == R.id.btnMenuAdvancedSearch) {
                     startActivity(new Intent(getApplicationContext(), AdvancedSearchActivity.class));
                     drawerLayout.closeDrawers();
+                } else if (item.getItemId() == R.id.btnMenuPopularTrip) {
+                    startActivity(new Intent(getApplicationContext(), PopularTrip.class));
+                    drawerLayout.closeDrawers();
                 }
                 return false;
             }

@@ -44,4 +44,7 @@ public class ApiURL {
     //Social Login
     public static String facebookLogin = "http://askrambler.com/Android_API/loginFacebook.php";
     public static String googleLogin = "http://askrambler.com/Android_API/loginGoogle.php";
+
+    //Popular
+    public static String getPopularTrip = "http://askrambler.com/Android_API/getPopularTrip.php";
 }
