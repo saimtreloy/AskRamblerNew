@@ -47,4 +47,7 @@ public class ApiURL {
 
     //Popular
     public static String getPopularTrip = "http://askrambler.com/Android_API/getPopularTrip.php";
+
+    //Submit Rating
+    public static String submitRating = "http://askrambler.com/Android_API/rateingSubmit.php";
 }

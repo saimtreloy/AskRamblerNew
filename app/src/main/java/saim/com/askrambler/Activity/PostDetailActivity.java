@@ -1,13 +1,16 @@
 package saim.com.askrambler.Activity;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,10 +18,13 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.awesomedialog.blennersilva.awesomedialoglibrary.AwesomeWarningDialog;
+import com.awesomedialog.blennersilva.awesomedialoglibrary.interfaces.Closure;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
@@ -35,12 +41,15 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import saim.com.askrambler.Adapter.AdapterPost;
+import saim.com.askrambler.Model.ModelPostShort;
 import saim.com.askrambler.R;
 import saim.com.askrambler.Util.ApiURL;
 import saim.com.askrambler.Util.CircleTransform;
 import saim.com.askrambler.Util.MySingleton;
+import saim.com.askrambler.Util.SharedPrefDatabase;
 
 public class PostDetailActivity extends AppCompatActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener{
 
@@ -142,8 +151,16 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
         txtPDTripType = (TextView) findViewById(R.id.txtPDTripType);
         txtPDTripDuration = (TextView) findViewById(R.id.txtPDTripDuration);
 
-        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         txtRateing = (TextView) findViewById(R.id.txtRateing);
+        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                if (fromUser == true){
+                    DialogRatingSubmit(Splash.user_id, user_id, post_id, rating+"");
+                }
+            }
+        });
 
         SaveGetPostInformation();
 
@@ -162,6 +179,7 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
                 startActivity(intent);
             }
         });
+
     }
 
     public void PopulateInformationCompanion(){
@@ -495,5 +513,67 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    public void DialogRatingSubmit(final String userID, final String postUserID, final String postID, final String rateing){
+        final AlertDialog.Builder builder = new AlertDialog.Builder(PostDetailActivity.this);
+        builder.setTitle("Submit Rating");
+        builder.setMessage("Please rate this post. Your rating very precious for us.");
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int which) {
+
+                    }
+        });
+        builder.setPositiveButton("YES",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int which) {
+                        if (new SharedPrefDatabase(getApplicationContext()).RetriveLogin() == null || new SharedPrefDatabase(getApplicationContext()).RetriveLogin().equals("No")){
+                            Toast.makeText(getApplicationContext(), "You are not login\nPlease login first", Toast.LENGTH_SHORT).show();
+                        }else if (new SharedPrefDatabase(getApplicationContext()).RetriveLogin().toString().equals("Yes") ){
+                            progressDialog.show();
+                            SubmitRating(userID, postUserID, postID, rateing);
+                        }
+
+                    }
+        });
+        builder.show();
+    }
+
+
+    public void SubmitRating(final String userID, final String postUserID, final String postID, final String rateing) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, ApiURL.submitRating,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String code = jsonObject.getString("code");
+                            String message = jsonObject.getString("message");
+                            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+
+                        } catch (Exception e) {
+
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("user_id_voter", userID);
+                params.put("post_user_id", postUserID);
+                params.put("ads_id", postID);
+                params.put("vote", rateing);
+                return params;
+            }
+        };
+        stringRequest.setShouldCache(false);
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+
     }
 }
