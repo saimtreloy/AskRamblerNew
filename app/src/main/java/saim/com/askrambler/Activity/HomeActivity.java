@@ -68,7 +68,6 @@ public class HomeActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     android.support.v7.app.ActionBarDrawerToggle actionBarDrawerToggle;
-    public static android.support.v4.app.FragmentTransaction fragmentTransaction;
 
     ProgressDialog progressDialog;
 
@@ -108,6 +107,7 @@ public class HomeActivity extends AppCompatActivity {
         actionBarDrawerToggle = new android.support.v7.app.ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
             @Override
             public void onDrawerOpened(View drawerView) {
+                Log.d("SAIM DRAWER", "Nav drawer opend");
                 super.onDrawerOpened(drawerView);
             }
         };
@@ -119,6 +119,13 @@ public class HomeActivity extends AppCompatActivity {
 
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             Toast.makeText(getApplicationContext(), "Drawer Open", Toast.LENGTH_LONG).show();
+            if (new SharedPrefDatabase(getApplicationContext()).RetriveLogin() == null){
+                PopulateViewOnNotLogin();
+            }else if (new SharedPrefDatabase(getApplicationContext()).RetriveLogin().toString().equals("Yes") ){
+                PopulateViewOnLogin();
+            }else {
+                PopulateViewOnNotLogin();
+            }
         }
 
         NavigationItemClicked();
@@ -237,6 +244,10 @@ public class HomeActivity extends AppCompatActivity {
         ImageView imgLogoutHeader = (ImageView) headerView.findViewById(R.id.imgLogoutHeader);
         TextView txtNameHeader = (TextView) headerView.findViewById(R.id.txtNameHeader);
         TextView txtRatingHeader = (TextView) headerView.findViewById(R.id.txtRatingHeader);
+        ImageView imgNavVarified = (ImageView) headerView.findViewById(R.id.imgNavVarified);
+
+        txtRatingHeader.setVisibility(View.VISIBLE);
+        imgNavVarified.setVisibility(View.VISIBLE);
 
         Log.d("SAIM INFO CHECK", new SharedPrefDatabase(getApplicationContext()).RetriveUserFullName() + "\n" +
                 new SharedPrefDatabase(getApplicationContext()).RetriveUserPhoto());
@@ -264,6 +275,18 @@ public class HomeActivity extends AppCompatActivity {
 
 
         txtNameHeader.setText(new SharedPrefDatabase(getApplicationContext()).RetriveUserFullName());
+        if (!Splash.rate.equals("null")){
+            if (Splash.rate.length()>2){
+                txtRatingHeader.setText(Splash.rate.substring(0,3));
+            }else {
+                txtRatingHeader.setText(Splash.rate);
+            }
+        }
+        if (Splash.verify.equals("1")){
+            imgNavVarified.setImageResource(R.drawable.ic_verified_user);
+        }else if (Splash.verify.equals("0")){
+            imgNavVarified.setImageResource(R.drawable.ic_not_varified_user);
+        }
 
         imgLogoutHeader.setVisibility(View.VISIBLE);
         imgLogoutHeader.setOnClickListener(new View.OnClickListener() {
@@ -317,11 +340,13 @@ public class HomeActivity extends AppCompatActivity {
         ImageView imgLogoutHeader = (ImageView) headerView.findViewById(R.id.imgLogoutHeader);
         TextView txtNameHeader = (TextView) headerView.findViewById(R.id.txtNameHeader);
         TextView txtRatingHeader = (TextView) headerView.findViewById(R.id.txtRatingHeader);
+        ImageView imgNavVarified = (ImageView) headerView.findViewById(R.id.imgNavVarified);
 
         imageViewHeader.setImageResource(R.drawable.ic_person);
         imgLogoutHeader.setVisibility(View.GONE);
         txtNameHeader.setText("Guest User");
-        txtRatingHeader.setText("5.00");
+        txtRatingHeader.setVisibility(View.GONE);
+        imgNavVarified.setVisibility(View.GONE);
     }
 
     @Override
@@ -391,8 +416,9 @@ public class HomeActivity extends AppCompatActivity {
                                     String details = jsonObjectList.getString("details");
                                     String full_name = jsonObjectList.getString("full_name");
                                     String user_photo = jsonObjectList.getString("user_photo");
+                                    String user_location = jsonObjectList.getString("user_location");
 
-                                    ModelPostShort modelPostShort = new ModelPostShort(ads_id, to_where, to_date,ad_type, details, full_name, user_photo);
+                                    ModelPostShort modelPostShort = new ModelPostShort(ads_id, to_where, to_date,ad_type, details, full_name, user_photo, user_location);
                                     Splash.modelPostsList.add(modelPostShort);
                                 }
 

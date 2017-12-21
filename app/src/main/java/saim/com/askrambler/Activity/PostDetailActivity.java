@@ -459,9 +459,13 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
                                 layoutDetailHost.setVisibility(View.GONE);
                                 PopulateInformationTrip();
                             }
-
+                            System.out.println(rateing);
                             if (!rateing.equals("null")){
-                                txtRateing.setText("Rate: "+rateing);
+                                if (rateing.length()>2){
+                                    txtRateing.setText("Rate: "+ rateing.substring(0,3));
+                                }else {
+                                    txtRateing.setText("Rate: "+ rateing);
+                                }
                                 float rate = Float.parseFloat(rateing);
                                 ratingBar.setRating(rate);
                             }else {

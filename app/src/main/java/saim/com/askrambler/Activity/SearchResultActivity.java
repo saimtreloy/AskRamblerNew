@@ -126,8 +126,9 @@ public class SearchResultActivity extends AppCompatActivity {
                                     String details = jsonObjectList.getString("details");
                                     String full_name = jsonObjectList.getString("full_name");
                                     String user_photo = jsonObjectList.getString("user_photo");
+                                    String user_location = jsonObjectList.getString("user_location");
 
-                                    ModelPostShort modelPostShort = new ModelPostShort(ads_id, to_where, to_date,ad_type, details, full_name, user_photo);
+                                    ModelPostShort modelPostShort = new ModelPostShort(ads_id, to_where, to_date,ad_type, details, full_name, user_photo,user_location);
                                     modelPostsList.add(modelPostShort);
                                 }
                                 progressDialog.dismiss();
@@ -205,8 +206,9 @@ public class SearchResultActivity extends AppCompatActivity {
                                     String details = jsonObjectList.getString("details");
                                     String full_name = jsonObjectList.getString("full_name");
                                     String user_photo = jsonObjectList.getString("user_photo");
+                                    String user_location = jsonObjectList.getString("user_location");
 
-                                    ModelPostShort modelPostShort = new ModelPostShort(ads_id, to_where, to_date,ad_type, details, full_name, user_photo);
+                                    ModelPostShort modelPostShort = new ModelPostShort(ads_id, to_where, to_date,ad_type, details, full_name, user_photo, user_location);
                                     modelPostsList.add(modelPostShort);
                                 }
                                 progressDialog.dismiss();
@@ -268,8 +270,9 @@ public class SearchResultActivity extends AppCompatActivity {
                                     String details = jsonObjectList.getString("details");
                                     String full_name = jsonObjectList.getString("full_name");
                                     String user_photo = jsonObjectList.getString("user_photo");
+                                    String user_location = jsonObjectList.getString("user_location");
 
-                                    ModelPostShort modelPostShort = new ModelPostShort(ads_id, to_where, to_date,ad_type, details, full_name, user_photo);
+                                    ModelPostShort modelPostShort = new ModelPostShort(ads_id, to_where, to_date,ad_type, details, full_name, user_photo, user_location);
                                     modelPostsList.add(modelPostShort);
                                 }
                                 progressDialog.dismiss();
@@ -331,8 +334,9 @@ public class SearchResultActivity extends AppCompatActivity {
                                     String details = jsonObjectList.getString("details");
                                     String full_name = jsonObjectList.getString("full_name");
                                     String user_photo = jsonObjectList.getString("user_photo");
+                                    String user_location = jsonObjectList.getString("user_location");
 
-                                    ModelPostShort modelPostShort = new ModelPostShort(ads_id, to_where, to_date,ad_type, details, full_name, user_photo);
+                                    ModelPostShort modelPostShort = new ModelPostShort(ads_id, to_where, to_date,ad_type, details, full_name, user_photo, user_location);
                                     modelPostsList.add(modelPostShort);
                                 }
                                 progressDialog.dismiss();

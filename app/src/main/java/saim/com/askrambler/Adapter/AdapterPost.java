@@ -54,7 +54,13 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.PostViewHolder
         holder.txtListUser.setText(adapterList.get(position).getFull_name());
         holder.txtListCategory.setText(adapterList.get(position).getAd_type());
         holder.txtListDetail.setText(adapterList.get(position).getDetails());
-        holder.txtToWhere.setText(adapterList.get(position).getTo_where());
+        if (adapterList.get(position).getAd_type().equals("Host")){
+            holder.txtToWhere.setText(adapterList.get(position).getUser_location());
+        } else {
+            holder.txtToWhere.setText(adapterList.get(position).getTo_where());
+        }
+
+
         holder.txtToDate.setText(adapterList.get(position).getTo_date());
         Glide.with(holder.txtToWhere.getContext())
                 .load(adapterList.get(position).getUser_photo()).transform(new CircleTransform(holder.imgAllPostList.getContext()))

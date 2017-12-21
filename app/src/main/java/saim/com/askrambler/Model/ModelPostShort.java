@@ -5,10 +5,10 @@ package saim.com.askrambler.Model;
  */
 
 public class ModelPostShort {
-    public String ads_id, to_where, to_date,ad_type,details,full_name ,user_photo;
+    public String ads_id, to_where, to_date,ad_type,details,full_name ,user_photo, user_location;
 
 
-    public ModelPostShort(String ads_id, String to_where, String to_date, String ad_type, String details, String full_name, String user_photo) {
+    public ModelPostShort(String ads_id, String to_where, String to_date, String ad_type, String details, String full_name, String user_photo, String user_location) {
         this.ads_id = ads_id;
         this.to_where = to_where;
         this.to_date = to_date;
@@ -16,6 +16,7 @@ public class ModelPostShort {
         this.details = details;
         this.full_name = full_name;
         this.user_photo = user_photo;
+        this.user_location = user_location;
     }
 
     public String getAds_id() {
@@ -44,5 +45,9 @@ public class ModelPostShort {
 
     public String getUser_photo() {
         return user_photo;
+    }
+
+    public String getUser_location() {
+        return user_location;
     }
 }

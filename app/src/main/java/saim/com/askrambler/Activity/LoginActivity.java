@@ -141,13 +141,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         btnRegSignUp = (Button) findViewById(R.id.btnRegSignUp);
 
         ButtonAction();
-        //SaveUserLogin("asasa", "sasa");
-
-
-        //Facebook
         FacebookSignIn();
-
-
         GoogleSignIn();
 
     }
@@ -301,6 +295,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                 Splash.like_to = jsonObjectList.getString("like_to");
                                 Splash.details = jsonObjectList.getString("details");
                                 Splash.server_date = jsonObjectList.getString("server_date");
+                                Splash.rate = jsonObjectList.getString("rate");
 
                                 new SharedPrefDatabase(getApplicationContext()).StoreLogin("Yes");
                                 new SharedPrefDatabase(getApplicationContext()).StoreUserEmail(email);
@@ -450,8 +445,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                 String gender = object.getString("gender");
                                 String fid = object.getString("id");
                                 String fbImage = "https://graph.facebook.com/"+fid+"/picture?type=large";
-
-                                Log.d("Saim FB Info", fnm + " " + lnm + "\n" + mail + "\n" + gender + "\n" + birthday + "\n" + fid + "\n" + fbImage);
                                 FacebookLogin(mail, fnm, lnm, gender, fid, fbImage);
 
                             } catch (JSONException e) {
@@ -587,6 +580,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
 
     public void FacebookLogin(final String email, final String f_name, final String l_name, final String gender, final String id, final String photoURL) {
+        Log.d("SAIM LOGIN", email + "\n" + f_name + " " + l_name + "\n" +id);
         progressDialog.setMessage("Login please wait...");
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
@@ -595,11 +589,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     @Override
                     public void onResponse(String response) {
                         progressDialog.dismiss();
-                        Log.d("SAIM RESPONSE", response);
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             String code = jsonObject.getString("code");
                             if (code.equals("success")){
+                                Log.d("SAIM LOGIN FAILED", email + "\n" + f_name + " " + l_name + "\n" +id);
                                 JSONArray jsonArray = jsonObject.getJSONArray("list");
                                 JSONObject jsonObjectList = jsonArray.getJSONObject(0);
 
@@ -634,6 +628,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                 Splash.like_to = jsonObjectList.getString("like_to");
                                 Splash.details = jsonObjectList.getString("details");
                                 Splash.server_date = jsonObjectList.getString("server_date");
+                                Splash.rate = jsonObjectList.getString("rate");
 
                                 new SharedPrefDatabase(getApplicationContext()).StoreLogin("Yes");
                                 new SharedPrefDatabase(getApplicationContext()).StoreSocialLogin(true);
@@ -646,6 +641,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                 sendBroadcast(new Intent("com.synergyinterface.askrambler.Activity.ChangeLayoutOnLogin"));
                                 finish();
                             }else {
+                                Log.d("SAIM LOGIN fAILeD", email + "\n" + f_name + " " + l_name + "\n" +id);
                                 String message = jsonObject.getString("message");
                                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
                             }

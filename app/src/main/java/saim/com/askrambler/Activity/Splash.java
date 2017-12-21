@@ -42,7 +42,7 @@ public class Splash extends AppCompatActivity {
     public static String user_id, nationality, full_name, email, password, agreement, status, roll,
             first_name, last_name, gander, address, city, zip, state, country, mobile, phone, birth_date,
             user_photo, document, verify, website, facebook, instagram, youtube, code1, cornjob,
-            like_to, details, server_date;
+            like_to, details, server_date,rate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,8 +89,9 @@ public class Splash extends AppCompatActivity {
                                     String details = jsonObjectList.getString("details");
                                     String full_name = jsonObjectList.getString("full_name");
                                     String user_photo = jsonObjectList.getString("user_photo");
+                                    String user_location = jsonObjectList.getString("user_location");
 
-                                    ModelPostShort modelPostShort = new ModelPostShort(ads_id, to_where, to_date,ad_type, details, full_name, user_photo);
+                                    ModelPostShort modelPostShort = new ModelPostShort(ads_id, to_where, to_date,ad_type, details, full_name, user_photo, user_location);
                                     modelPostsList.add(modelPostShort);
                                 }
 
@@ -162,6 +163,7 @@ public class Splash extends AppCompatActivity {
                                 like_to = jsonObjectList.getString("like_to");
                                 details = jsonObjectList.getString("details");
                                 server_date = jsonObjectList.getString("server_date");
+                                rate = jsonObjectList.getString("rate");
 
                                 new SharedPrefDatabase(getApplicationContext()).StoreLogin("Yes");
                                 new SharedPrefDatabase(getApplicationContext()).StoreUserFullName(full_name);

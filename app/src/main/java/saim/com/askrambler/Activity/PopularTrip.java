@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.android.volley.Request;
@@ -49,6 +50,7 @@ public class PopularTrip extends AppCompatActivity {
     public void Initialization() {
         toolbar = (Toolbar) findViewById(R.id.toolbarPopularTrip);
         setSupportActionBar(toolbar);
+        toolbar.setTitle("Popular Trip");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         progressDialog = new ProgressDialog(this);
@@ -88,8 +90,9 @@ public class PopularTrip extends AppCompatActivity {
                                     String details = jsonObjectList.getString("details");
                                     String full_name = jsonObjectList.getString("full_name");
                                     String user_photo = jsonObjectList.getString("user_photo");
+                                    String user_location = jsonObjectList.getString("user_location");
 
-                                    ModelPostShort modelPostShort = new ModelPostShort(ads_id, to_where, to_date,ad_type, details, full_name, user_photo);
+                                    ModelPostShort modelPostShort = new ModelPostShort(ads_id, to_where, to_date,ad_type, details, full_name, user_photo, user_location);
                                     modelPostsList.add(modelPostShort);
                                 }
                                 popularTripAdapter = new AdapterPost(modelPostsList);
@@ -110,5 +113,16 @@ public class PopularTrip extends AppCompatActivity {
         stringRequest.setShouldCache(false);
         MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        if (id==android.R.id.home) {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
