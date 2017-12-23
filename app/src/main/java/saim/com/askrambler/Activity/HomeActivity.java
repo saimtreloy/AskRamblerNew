@@ -201,8 +201,17 @@ public class HomeActivity extends AppCompatActivity {
                 } else if (item.getItemId() == R.id.btnMenuAdvancedSearch) {
                     startActivity(new Intent(getApplicationContext(), AdvancedSearchActivity.class));
                     drawerLayout.closeDrawers();
+                } else if (item.getItemId() == R.id.btnMenuCompanion) {
+                    startActivity(new Intent(getApplicationContext(), PopularTrip.class).putExtra("ADD_TYPE", "1").putExtra("TITLE", "Companion"));
+                    drawerLayout.closeDrawers();
+                } else if (item.getItemId() == R.id.btnMenuSendBaggage) {
+                    startActivity(new Intent(getApplicationContext(), PopularTrip.class).putExtra("ADD_TYPE", "2").putExtra("TITLE", "Send Baggage"));
+                    drawerLayout.closeDrawers();
                 } else if (item.getItemId() == R.id.btnMenuPopularTrip) {
-                    startActivity(new Intent(getApplicationContext(), PopularTrip.class));
+                    startActivity(new Intent(getApplicationContext(), PopularTrip.class).putExtra("ADD_TYPE", "3").putExtra("TITLE", "Popular Trip"));
+                    drawerLayout.closeDrawers();
+                } else if (item.getItemId() == R.id.btnMenuHost) {
+                    startActivity(new Intent(getApplicationContext(), PopularTrip.class).putExtra("ADD_TYPE", "4").putExtra("TITLE", "Find Host"));
                     drawerLayout.closeDrawers();
                 }
                 return false;

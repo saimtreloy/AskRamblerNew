@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -20,12 +21,15 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import saim.com.askrambler.Adapter.AdapterPost;
 import saim.com.askrambler.Model.ModelPostShort;
 import saim.com.askrambler.R;
 import saim.com.askrambler.Util.ApiURL;
 import saim.com.askrambler.Util.MySingleton;
+import saim.com.askrambler.Util.SharedPrefDatabase;
 
 public class PopularTrip extends AppCompatActivity {
 
@@ -38,11 +42,14 @@ public class PopularTrip extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManagerAllPopularTrip;
     RecyclerView.Adapter popularTripAdapter;
 
+    String title , add_type;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppThemeNew);
         setContentView(R.layout.activity_popular_trip);
+
         Initialization();
     }
 
@@ -50,8 +57,8 @@ public class PopularTrip extends AppCompatActivity {
     public void Initialization() {
         toolbar = (Toolbar) findViewById(R.id.toolbarPopularTrip);
         setSupportActionBar(toolbar);
-        toolbar.setTitle("Popular Trip");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle(getIntent().getExtras().getString("TITLE"));
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading data...");
@@ -63,16 +70,17 @@ public class PopularTrip extends AppCompatActivity {
         recyclerAllPopularTrip.setLayoutManager(layoutManagerAllPopularTrip);
         recyclerAllPopularTrip.setHasFixedSize(true);
 
-        SaveGetAllPost();
+        SaveGetAllPost(getIntent().getExtras().getString("ADD_TYPE"));
     }
 
 
-    public void SaveGetAllPost() {
+    public void SaveGetAllPost(final String add_type) {
         modelPostsList.clear();
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, ApiURL.getPopularTrip,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, ApiURL.getPopularTrip,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        Log.d("POPULAR TRIP", response);
                         progressDialog.dismiss();
                         try {
                             JSONObject jsonObject = new JSONObject(response);
@@ -109,7 +117,15 @@ public class PopularTrip extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
 
             }
-        });
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("ad_type_id", add_type);
+
+                return params;
+            }
+        };
         stringRequest.setShouldCache(false);
         MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
 

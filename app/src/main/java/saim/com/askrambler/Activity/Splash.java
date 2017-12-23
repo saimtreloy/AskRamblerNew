@@ -49,7 +49,6 @@ public class Splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-
         try {
             PackageInfo info = getPackageManager().getPackageInfo("saim.com.askrambler", PackageManager.GET_SIGNATURES);
             for (Signature signature : info.signatures) {

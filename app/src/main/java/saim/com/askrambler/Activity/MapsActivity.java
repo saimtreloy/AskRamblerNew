@@ -123,7 +123,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 String postTitle = Splash.modelLocationList.get(i).getUserName();
                 String postMessage = Splash.modelLocationList.get(i).getIsType();
 
-                Drawable dHost = getResources().getDrawable(R.drawable.ic_map_host);
+                Drawable dHost = getResources().getDrawable(R.drawable.ic_host_map);
                 BitmapDescriptor markerIcon = getMarkerIconFromDrawable(dHost);
 
                 myMarker = mMap.addMarker(new MarkerOptions().position(latLng).title(postTitle).snippet(postMessage).icon(markerIcon));

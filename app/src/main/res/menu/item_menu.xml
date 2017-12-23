@@ -18,7 +18,19 @@
         android:icon="@drawable/ic_search"
         android:title="Advanced Search" />
     <item
+        android:id="@+id/btnMenuCompanion"
+        android:icon="@drawable/ic_companion"
+        android:title="Companion" />
+    <item
+        android:id="@+id/btnMenuSendBaggage"
+        android:icon="@drawable/ic_send_baggage"
+        android:title="Send Baggage" />
+    <item
         android:id="@+id/btnMenuPopularTrip"
         android:icon="@drawable/ic_popular_trip"
         android:title="Popular Trip" />
+    <item
+        android:id="@+id/btnMenuHost"
+        android:icon="@drawable/ic_host_nav"
+        android:title="Find Host" />
 </menu>

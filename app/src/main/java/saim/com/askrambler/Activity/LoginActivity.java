@@ -630,6 +630,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                 Splash.server_date = jsonObjectList.getString("server_date");
                                 Splash.rate = jsonObjectList.getString("rate");
 
+                                Log.d("SAIM RATE ", Splash.rate);
+
                                 new SharedPrefDatabase(getApplicationContext()).StoreLogin("Yes");
                                 new SharedPrefDatabase(getApplicationContext()).StoreSocialLogin(true);
                                 new SharedPrefDatabase(getApplicationContext()).StoreUserEmail(email);
