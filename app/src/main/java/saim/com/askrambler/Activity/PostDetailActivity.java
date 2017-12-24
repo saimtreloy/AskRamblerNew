@@ -70,11 +70,11 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
     public TextView txtPDDetail, txtPDLocation, txtPDService, txtPDHost, txtPDTraveler, txtPDOffering,
             txtPDSmocking, txtPDAlcohol, txtPDUserName, txtPDUserEmail, txtPDUserPhone;
     //Companion Textview
-    public TextView txtPDCompDestination, txtPDCompTravelDate, txtPDCompServiceType, txtPDCompGender, txtPDCompTravelBy;
+    public TextView txtPDCompDestination, txtPDCompTravelDate, txtPDCompServiceType, txtPDCompGender, txtPDCompTravelBy, txtPDCompFrom;
     //Baggage Textview
-    public TextView txtPDBagDestination, txtPDBagTravelDate, txtPDBagServiceType, txtPDBagBaggage, txtPDBagBaggageType, txtPDBagBaggageWeight;
+    public TextView txtPDBagDestination, txtPDBagTravelDate, txtPDBagServiceType, txtPDBagBaggage, txtPDBagBaggageType, txtPDBagBaggageWeight, txtPDBagFrom;
     //Baggage Textview
-    public TextView txtPDTripDestination, txtPDTripTravelDate, txtPDTripServiceType, txtPDTripTrip, txtPDTripCategory, txtPDTripType, txtPDTripDuration;
+    public TextView txtPDTripDestination, txtPDTripTravelDate, txtPDTripServiceType, txtPDTripTrip, txtPDTripCategory, txtPDTripType, txtPDTripDuration, txtPDTripFrom;
     public ImageView imgPDStatus, imgPDUser;
 
     public RatingBar ratingBar;
@@ -133,6 +133,7 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
         txtPDCompServiceType = (TextView) findViewById(R.id.txtPDCompServiceType);
         txtPDCompGender = (TextView) findViewById(R.id.txtPDCompGender);
         txtPDCompTravelBy = (TextView) findViewById(R.id.txtPDCompTravelBy);
+        txtPDCompFrom = (TextView) findViewById(R.id.txtPDCompFrom);
 
         //Baggage
         txtPDBagDestination = (TextView) findViewById(R.id.txtPDBagDestination);
@@ -141,6 +142,7 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
         txtPDBagBaggage = (TextView) findViewById(R.id.txtPDBagBaggage);
         txtPDBagBaggageType = (TextView) findViewById(R.id.txtPDBagBaggageType);
         txtPDBagBaggageWeight = (TextView) findViewById(R.id.txtPDBagBaggageWeight);
+        txtPDBagFrom = (TextView) findViewById(R.id.txtPDBagFrom);
 
         //Trip
         txtPDTripDestination = (TextView) findViewById(R.id.txtPDTripDestination);
@@ -150,6 +152,7 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
         txtPDTripCategory = (TextView) findViewById(R.id.txtPDTripCategory);
         txtPDTripType = (TextView) findViewById(R.id.txtPDTripType);
         txtPDTripDuration = (TextView) findViewById(R.id.txtPDTripDuration);
+        txtPDTripFrom = (TextView) findViewById(R.id.txtPDTripFrom);
 
         txtRateing = (TextView) findViewById(R.id.txtRateing);
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
@@ -184,6 +187,7 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
     public void PopulateInformationCompanion(){
         txtPDDetail.setText(details);
 
+        txtPDCompFrom.setText(from_where);
         txtPDCompDestination.setText(to_where);
         txtPDCompTravelDate.setText(from_date);
         txtPDCompServiceType.setText(payment_category);
@@ -221,6 +225,7 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
     public void PopulateInformationBaggage(){
         txtPDDetail.setText(details);
 
+        txtPDBagFrom.setText(from_where);
         txtPDBagDestination.setText(to_where);
         txtPDBagTravelDate.setText(from_date);
         txtPDBagServiceType.setText(payment_category);
@@ -257,6 +262,7 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
     public void PopulateInformationTrip(){
         txtPDDetail.setText(details);
 
+        txtPDTripFrom.setText(from_where);
         txtPDTripDestination.setText(to_where);
         txtPDTripTravelDate.setText(from_date);
         txtPDTripServiceType.setText(payment_category);
