@@ -456,7 +456,7 @@ public class HomeActivity extends AppCompatActivity {
         IntentFilter intentFilter = new IntentFilter("com.synergyinterface.askrambler.Activity.ChangeLayoutOnLogin");
         registerReceiver(receiverChangeLayoutOnLogin, intentFilter);
 
-        IntentFilter intentFilter2 = new IntentFilter("com.synergyinterface.askrambler.Activity.receiverPost");
+        IntentFilter intentFilter2 = new IntentFilter("č");
         registerReceiver(receiverPost, intentFilter2);
     }
 

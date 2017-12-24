@@ -164,7 +164,6 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
 
         SaveGetPostInformation();
 
-
         txtPDUserEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -294,7 +293,7 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
 
     public void PopulateInformationHost(){
         txtPDDetail.setText(details);
-        txtPDLocation.setText(to_where);
+        txtPDLocation.setText(location);
         txtPDService.setText(payment_category);
         txtPDHost.setText(isType);
         txtPDTraveler.setText(travelers);

@@ -1250,7 +1250,8 @@ public class AddPostActivity extends AppCompatActivity {
                                 progressDialog.dismiss();
                                 String message = jsonObject.getString("message");
                                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                                getApplicationContext().sendBroadcast(new Intent("com.synergyinterface.askrambler.Activity.receiverPost"));
+                                sendBroadcast(new Intent("com.synergyinterface.askrambler.Activity.receiverPost"));
+                                finish();
                             }else {
                                 progressDialog.dismiss();
                                 String message = jsonObject.getString("message");
@@ -1322,7 +1323,8 @@ public class AddPostActivity extends AppCompatActivity {
                                 progressDialog.dismiss();
                                 String message = jsonObject.getString("message");
                                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                                getApplicationContext().sendBroadcast(new Intent("com.synergyinterface.askrambler.Activity.receiverPost"));
+                                sendBroadcast(new Intent("com.synergyinterface.askrambler.Activity.receiverPost"));
+                                finish();
                             }else {
                                 progressDialog.dismiss();
                                 String message = jsonObject.getString("message");
@@ -1396,7 +1398,8 @@ public class AddPostActivity extends AppCompatActivity {
                                 progressDialog.dismiss();
                                 String message = jsonObject.getString("message");
                                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                                getApplicationContext().sendBroadcast(new Intent("com.synergyinterface.askrambler.Activity.receiverPost"));
+                                sendBroadcast(new Intent("com.synergyinterface.askrambler.Activity.receiverPost"));
+                                finish();
                             }else {
                                 progressDialog.dismiss();
                                 String message = jsonObject.getString("message");
@@ -1466,14 +1469,15 @@ public class AddPostActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            Log.d("SAIM RESPONSE IMAGES", images);
+                            Log.d("SAIM RESPONSE IMAGES", response);
                             JSONObject jsonObject = new JSONObject(response);
                             String code = jsonObject.getString("code");
                             if (code.equals("Success")){
                                 progressDialog.dismiss();
                                 String message = jsonObject.getString("message");
                                 Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-                                getApplicationContext().sendBroadcast(new Intent("com.synergyinterface.askrambler.Activity.receiverPost"));
+                                finish();
+                                sendBroadcast(new Intent("com.synergyinterface.askrambler.Activity.receiverPost"));
                             }else {
                                 progressDialog.dismiss();
                                 String message = jsonObject.getString("message");

@@ -13,7 +13,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "791444936896-u5g9jpn0gvlm2kiiqdn55vapoiqg627k.apps.googleusercontent.com",
+          "client_id": "791444936896-sksfv6hmvvdjo82oi4rj9k8l62el5pof.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "saim.com.askrambler",
@@ -21,13 +21,13 @@
           }
         },
         {
-          "client_id": "791444936896-qjcca1nv7ovfembgj695c9ja5abg0pq6.apps.googleusercontent.com",
+          "client_id": "791444936896-p55h5be8n7kndiuaonk9nporp12ta2dk.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBFgZ71fBEEc2ch8FazK1xOn5ojvPrgyJc"
+          "current_key": "AIzaSyBok7mTe2d_SSgc8DG3rEUvJrXPPnKFdQ4"
         }
       ],
       "services": {
