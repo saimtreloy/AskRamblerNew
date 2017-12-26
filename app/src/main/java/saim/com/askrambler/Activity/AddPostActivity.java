@@ -136,10 +136,10 @@ public class AddPostActivity extends AppCompatActivity {
         setSupportActionBar(toolbarAddPost);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         init();
+
     }
 
 
@@ -232,9 +232,7 @@ public class AddPostActivity extends AppCompatActivity {
         checkBoxTransport = (CheckBox) findViewById(R.id.checkBoxTransport);
 
         seekBarNoTravelerHost = (SeekBar) findViewById(R.id.seekBarNoTravelerHost);
-
         txtAddHostNoTraveler = (TextView) findViewById(R.id.txtAddHostNoTraveler);
-
         btnAddHostPostAdd = (Button) findViewById(R.id.btnAddHostPostAdd);
 
         HostEditTextClick();
@@ -242,6 +240,7 @@ public class AddPostActivity extends AppCompatActivity {
         //Populate some information
 
         populateEditTextInfo();
+
     }
 
 
@@ -397,10 +396,23 @@ public class AddPostActivity extends AppCompatActivity {
 
 
     public void populateEditTextInfo(){
-        inputAddComContact.setText(Splash.phone);
-        inputAddBagContactNo.setText(Splash.phone);
-        inputAddTripContactNo.setText(Splash.phone);
-        inputAddHostContactNo.setText(Splash.phone);
+        if ((Splash.phone.isEmpty() || Splash.phone.equals("null")) && (Splash.mobile.isEmpty() || Splash.mobile.equals("null")) ) {
+            inputAddComContact.setEnabled(true);
+            inputAddBagContactNo.setEnabled(true);
+            inputAddTripContactNo.setEnabled(true);
+            inputAddHostContactNo.setEnabled(true);
+        } else if (Splash.phone.isEmpty() || Splash.phone.equals("null")) {
+            inputAddComContact.setText(Splash.mobile);
+            inputAddBagContactNo.setText(Splash.mobile);
+            inputAddTripContactNo.setText(Splash.mobile);
+            inputAddHostContactNo.setText(Splash.mobile);
+        } else {
+            inputAddComContact.setText(Splash.phone);
+            inputAddBagContactNo.setText(Splash.phone);
+            inputAddTripContactNo.setText(Splash.phone);
+            inputAddHostContactNo.setText(Splash.phone);
+        }
+
     }
 
 

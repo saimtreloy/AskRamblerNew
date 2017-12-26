@@ -213,8 +213,8 @@
                             android:layout_weight="1"
                             android:background="@drawable/ic_round"
                             android:hint="Eg. +8801711415554"
-                            android:inputType="number"
                             android:enabled="false"
+                            android:inputType="number"
                             android:textSize="12dp" />
 
                         <EditText
@@ -591,9 +591,9 @@
                                 android:layout_marginLeft="2dp"
                                 android:layout_marginRight="2dp"
                                 android:layout_weight="1"
+                                android:enabled="false"
                                 android:background="@drawable/ic_round"
                                 android:hint="Contact"
-                                android:enabled="false"
                                 android:textSize="12dp" />
 
                         </LinearLayout>
@@ -706,9 +706,9 @@
                                 android:layout_height="35dp"
                                 android:layout_marginRight="2dp"
                                 android:layout_weight="1"
+                                android:enabled="false"
                                 android:background="@drawable/ic_round"
                                 android:hint="Contact No"
-                                android:enabled="false"
                                 android:textSize="12dp" />
 
                             <EditText
