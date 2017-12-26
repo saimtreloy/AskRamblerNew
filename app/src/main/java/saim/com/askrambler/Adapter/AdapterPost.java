@@ -59,11 +59,16 @@ public class AdapterPost extends RecyclerView.Adapter<AdapterPost.PostViewHolder
         } else {
             holder.txtToWhere.setText(adapterList.get(position).getTo_where());
         }
-
-
         holder.txtToDate.setText(adapterList.get(position).getTo_date());
+
+        /*if (!adapterList.get(position).getUser_photo().contains(".jpg") || !adapterList.get(position).getUser_photo().contains(".png")){
+            holder.imgAllPostList.setBackgroundResource(R.drawable.ic_person);
+        } else {
+
+        }*/
         Glide.with(holder.txtToWhere.getContext())
                 .load(adapterList.get(position).getUser_photo()).transform(new CircleTransform(holder.imgAllPostList.getContext()))
+                .error(R.drawable.ic_person_place_holder)
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
                     public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {

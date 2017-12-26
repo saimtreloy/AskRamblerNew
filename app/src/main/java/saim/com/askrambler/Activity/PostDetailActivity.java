@@ -206,6 +206,7 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
 
         Glide.with(getApplicationContext())
                 .load(user_photo).transform(new CircleTransform(getApplicationContext()))
+                .error(R.drawable.ic_person_place_holder)
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
                     public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
@@ -245,6 +246,7 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
 
         Glide.with(getApplicationContext())
                 .load(user_photo).transform(new CircleTransform(getApplicationContext()))
+                .error(R.drawable.ic_person_place_holder)
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
                     public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
@@ -283,6 +285,7 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
 
         Glide.with(getApplicationContext())
                 .load(user_photo).transform(new CircleTransform(getApplicationContext()))
+                .error(R.drawable.ic_person_place_holder)
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
                     public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
@@ -316,8 +319,11 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
             imgPDStatus.setImageResource(R.drawable.ic_not_varified_user);
         }
 
+        Log.d("USER PHOTO SAIM", user_photo);
+
         Glide.with(getApplicationContext())
                 .load(user_photo).transform(new CircleTransform(getApplicationContext()))
+                .error(R.drawable.ic_person_place_holder)
                 .listener(new RequestListener<String, GlideDrawable>() {
                     @Override
                     public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
