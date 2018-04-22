@@ -72,6 +72,7 @@ public class Splash extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        Log.d("SAIM SAIM SAIM", response);
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             String code = jsonObject.getString("code");
@@ -205,6 +206,7 @@ public class Splash extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        Log.d("SAIM SAIM SAIM", response);
                         try {
                             JSONObject jsonObject = new JSONObject(response);
 

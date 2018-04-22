@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:layout_marginLeft="12dp"
+    android:layout_marginTop="12dp"
+    android:layout_marginRight="12dp"
+    android:orientation="vertical"
+    app:cardElevation="6dp"
+    app:cardCornerRadius="6dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                app:cardBackgroundColor="#efefef"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="4dp"
+                app:cardCornerRadius="8dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_place"
+                    android:tint="@android:color/black"/>
+
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:id="@+id/txtFromWhere"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingLeft="4dp"
+                android:text="Dhaka To Rajshahi Dhaka To Rajshahi"
+                android:textStyle="bold"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="2dp">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                app:cardBackgroundColor="#efefef"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="4dp"
+                app:cardCornerRadius="8dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_call"
+                    android:backgroundTint="@color/black"/>
+
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:id="@+id/txtPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="4dp"
+                android:text="+8801711415554"
+                android:textStyle="italic"
+                android:gravity="center_vertical" />
+
+            <android.support.v7.widget.CardView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                app:cardBackgroundColor="#efefef"
+                android:layout_gravity="center_vertical"
+                app:cardCornerRadius="8dp"
+                android:layout_margin="4dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_type"
+                    android:backgroundTint="@color/black"/>
+
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/txtType"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="4dp"
+                android:text="Companion"
+                android:textColor="@color/colorAccent"
+                android:textStyle="italic"
+                android:gravity="center_vertical"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="2dp">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                app:cardBackgroundColor="#efefef"
+                android:layout_gravity="center_vertical"
+                app:cardCornerRadius="8dp"
+                android:layout_margin="4dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_date"
+                    android:backgroundTint="@color/black"/>
+
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:id="@+id/txtEDate"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="4dp"
+                android:text="04/27/2018"
+                android:gravity="center_vertical"
+                android:textSize="12sp"/>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                app:cardBackgroundColor="#efefef"
+                android:layout_gravity="center_vertical"
+                app:cardCornerRadius="8dp"
+                android:layout_margin="4dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_date"
+                    android:backgroundTint="@color/black"/>
+
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/txtAPDate"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="4dp"
+                android:text="Sun, 22nd April, 2018 12:04:11 AM"
+                android:gravity="center_vertical"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                app:cardBackgroundColor="#efefef"
+                android:layout_gravity="center_vertical"
+                app:cardCornerRadius="8dp"
+                android:layout_margin="4dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_request_post"
+                    android:tint="@android:color/black"/>
+
+            </android.support.v7.widget.CardView>
+
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/txtRequest"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="4dp"
+                android:text="Request Found : 2+"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:textColor="@android:color/holo_green_dark"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end">
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/imgEditList"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                app:cardBackgroundColor="#efefef"
+                android:layout_gravity="center_vertical"
+                app:cardCornerRadius="18dp"
+                android:layout_margin="4dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_edit"
+                    android:tint="@android:color/holo_blue_dark"/>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/imgDeleteList"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                app:cardBackgroundColor="#efefef"
+                android:layout_gravity="center_vertical"
+                app:cardCornerRadius="18dp"
+                android:layout_margin="4dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_delete"
+                    android:tint="@android:color/holo_red_dark"/>
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+
+
+
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

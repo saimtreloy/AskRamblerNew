@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -79,6 +80,7 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
 
     public RatingBar ratingBar;
     public TextView txtRateing;
+    public Button btnRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,6 +167,8 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
             }
         });
 
+        btnRequest = (Button) findViewById(R.id.btnRequest);
+
         SaveGetPostInformation();
 
         txtPDUserEmail.setOnClickListener(new View.OnClickListener() {
@@ -179,6 +183,14 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
             public void onClick(View v) {
                 Intent intent = new Intent(android.content.Intent.ACTION_DIAL, Uri.parse("tel:"+txtPDUserPhone.getText().toString()));
                 startActivity(intent);
+            }
+        });
+
+
+        btnRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SubmitRequest(post_id, Splash.user_id, user_id);
             }
         });
 
@@ -584,6 +596,51 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
                 params.put("post_user_id", postUserID);
                 params.put("ads_id", postID);
                 params.put("vote", rateing);
+                return params;
+            }
+        };
+        stringRequest.setShouldCache(false);
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+
+    }
+
+
+    public void SubmitRequest(final String ad_id, final String sender_user_id, final String receiver_user_id) {
+        progressDialog.show();
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, ApiURL.makePostRequest,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("POPULAR TRIP", response);
+                        progressDialog.dismiss();
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String code = jsonObject.getString("code");
+                            if (code.equals("success")) {
+                                String message = jsonObject.getString("message");
+                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                                finish();
+                            }else {
+                                String message = jsonObject.getString("message");
+                                Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception e) {
+
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("ad_id", ad_id);
+                params.put("sender_user_id", sender_user_id);
+                params.put("receiver_user_id", receiver_user_id);
+
                 return params;
             }
         };

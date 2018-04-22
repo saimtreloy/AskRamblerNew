@@ -50,4 +50,9 @@ public class ApiURL {
 
     //Submit Rating
     public static String submitRating = "http://askrambler.com/Android_API/rateingSubmit.php";
+
+
+    //
+    public static String getManagePost = "http://askrambler.com/Android_API/getManagePost.php";
+    public static String makePostRequest = "http://askrambler.com/Android_API/makePostRequest.php";
 }

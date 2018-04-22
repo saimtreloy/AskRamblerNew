@@ -33,4 +33,12 @@
         android:id="@+id/btnMenuHost"
         android:icon="@drawable/ic_host_nav"
         android:title="Find Host" />
+    <item
+        android:id="@+id/btnMenuManagePost"
+        android:icon="@drawable/ic_manage_post"
+        android:title="Manage Post" />
+    <item
+        android:id="@+id/btnMenuRequestPost"
+        android:icon="@drawable/ic_request_post"
+        android:title="Request Post" />
 </menu>

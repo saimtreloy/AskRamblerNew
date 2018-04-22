@@ -213,6 +213,9 @@ public class HomeActivity extends AppCompatActivity {
                 } else if (item.getItemId() == R.id.btnMenuHost) {
                     startActivity(new Intent(getApplicationContext(), PopularTrip.class).putExtra("ADD_TYPE", "4").putExtra("TITLE", "Find Host"));
                     drawerLayout.closeDrawers();
+                } else if (item.getItemId() == R.id.btnMenuManagePost) {
+                    startActivity(new Intent(getApplicationContext(), ManagePost.class));
+                    drawerLayout.closeDrawers();
                 }
                 return false;
             }
@@ -247,6 +250,8 @@ public class HomeActivity extends AppCompatActivity {
         Menu nav_menu = navigationView.getMenu();
         nav_menu.findItem(R.id.btnMenuSignIn).setVisible(false);
         nav_menu.findItem(R.id.btnMenuProfile).setVisible(true);
+        nav_menu.findItem(R.id.btnMenuManagePost).setVisible(true);
+        nav_menu.findItem(R.id.btnMenuRequestPost).setVisible(true);
 
         View headerView = navigationView.getHeaderView(0);
         ImageView imageViewHeader = (ImageView) headerView.findViewById(R.id.imageViewHeader);
@@ -342,6 +347,8 @@ public class HomeActivity extends AppCompatActivity {
     public void PopulateViewOnNotLogin(){
         Menu nav_menu = navigationView.getMenu();
         nav_menu.findItem(R.id.btnMenuProfile).setVisible(false);
+        nav_menu.findItem(R.id.btnMenuManagePost).setVisible(false);
+        nav_menu.findItem(R.id.btnMenuRequestPost).setVisible(false);
         nav_menu.findItem(R.id.btnMenuSignIn).setVisible(true);
 
         View headerView = navigationView.getHeaderView(0);
