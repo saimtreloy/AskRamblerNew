@@ -216,6 +216,9 @@ public class HomeActivity extends AppCompatActivity {
                 } else if (item.getItemId() == R.id.btnMenuManagePost) {
                     startActivity(new Intent(getApplicationContext(), ManagePost.class));
                     drawerLayout.closeDrawers();
+                } else if (item.getItemId() == R.id.btnMenuRequestPost) {
+                    startActivity(new Intent(getApplicationContext(), RequestedPost.class));
+                    drawerLayout.closeDrawers();
                 }
                 return false;
             }
