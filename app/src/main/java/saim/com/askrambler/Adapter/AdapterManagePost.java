@@ -19,6 +19,7 @@ import com.bumptech.glide.request.target.Target;
 import java.util.ArrayList;
 
 import saim.com.askrambler.Activity.PostDetailActivity;
+import saim.com.askrambler.Activity.RequestList;
 import saim.com.askrambler.Model.ModelManagePost;
 import saim.com.askrambler.Model.ModelPostShort;
 import saim.com.askrambler.R;
@@ -90,7 +91,7 @@ public class AdapterManagePost extends RecyclerView.Adapter<AdapterManagePost.Po
 
         @Override
         public void onClick(View v) {
-
+            v.getContext().startActivity(new Intent(v.getContext().getApplicationContext(), RequestList.class).putExtra("AD_ID", adapterList.get(getAdapterPosition()).getId()));
         }
     }
 }

@@ -191,16 +191,25 @@
 
             </android.support.v7.widget.CardView>
 
-            <TextView
-                android:layout_weight="1"
-                android:id="@+id/txtRequest"
+
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingLeft="4dp"
-                android:text="Request Found : 2+"
-                android:gravity="center_vertical"
-                android:textStyle="bold"
-                android:textColor="@android:color/holo_green_dark"/>
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_weight="1"
+                    android:id="@+id/txtRequest"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="4dp"
+                    android:text="Request Found : 2+"
+                    android:gravity="center_vertical"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/holo_green_dark"/>
+
+            </android.support.v7.widget.CardView>
+
+
 
         </LinearLayout>
 

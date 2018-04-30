@@ -3,7 +3,9 @@ package saim.com.askrambler.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -89,6 +91,13 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
         setContentView(R.layout.activity_post_detail);
 
         init();
+
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                RequestStatus(post_id, Splash.user_id);
+            }
+        });
     }
 
 
@@ -168,6 +177,7 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
         });
 
         btnRequest = (Button) findViewById(R.id.btnRequest);
+        btnRequest.setVisibility(View.GONE);
 
         SaveGetPostInformation();
 
@@ -511,7 +521,6 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
         MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
     }
 
-
     protected void sendEmail(String mail) {
         String[] TO = {mail};
         String[] CC = {""};
@@ -542,7 +551,6 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
         return super.onOptionsItemSelected(item);
     }
 
-
     public void DialogRatingSubmit(final String userID, final String postUserID, final String postID, final String rateing){
         final AlertDialog.Builder builder = new AlertDialog.Builder(PostDetailActivity.this);
         builder.setTitle("Submit Rating");
@@ -565,7 +573,6 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
         });
         builder.show();
     }
-
 
     public void SubmitRating(final String userID, final String postUserID, final String postID, final String rateing) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, ApiURL.submitRating,
@@ -604,7 +611,6 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
 
     }
 
-
     public void SubmitRequest(final String ad_id, final String sender_user_id, final String receiver_user_id) {
         progressDialog.show();
         StringRequest stringRequest = new StringRequest(Request.Method.POST, ApiURL.makePostRequest,
@@ -640,6 +646,61 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
                 params.put("ad_id", ad_id);
                 params.put("sender_user_id", sender_user_id);
                 params.put("receiver_user_id", receiver_user_id);
+
+                return params;
+            }
+        };
+        stringRequest.setShouldCache(false);
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+
+    }
+
+    public void RequestStatus(final String ad_id, final String sender_user_id) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, ApiURL.getPostRequestStatus,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("SAIM STATUS", response);
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String code = jsonObject.getString("code");
+                            if (code.equals("success")) {
+                                String message = jsonObject.getString("message");
+
+                                if (message.equals("Confirm")) {
+                                    btnRequest.setVisibility(View.VISIBLE);
+                                } else if (message.equals("Accept")) {
+                                    btnRequest.setVisibility(View.VISIBLE);
+                                    btnRequest.setText(message);
+                                    btnRequest.setEnabled(false);
+                                    btnRequest.setTextColor(R.color.colorAccent);
+                                } else if (message.equals("Pending")) {
+                                    btnRequest.setVisibility(View.VISIBLE);
+                                    btnRequest.setText(message);
+                                    btnRequest.setEnabled(false);
+                                    btnRequest.setTextColor(R.color.colorAccent);
+                                } else if (message.equals("Cancel")) {
+                                    btnRequest.setVisibility(View.VISIBLE);
+                                }
+                            }else {
+                                btnRequest.setVisibility(View.VISIBLE);
+                                String message = jsonObject.getString("message");
+                            }
+                        } catch (Exception e) {
+
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String, String>();
+                params.put("ad_id", ad_id);
+                params.put("sender_user_id", sender_user_id);
 
                 return params;
             }

@@ -66,7 +66,8 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".Activity.PopularTrip" />
         <activity android:name=".Activity.ManagePost" />
-        <activity android:name=".Activity.RequestedPost"></activity>
+        <activity android:name=".Activity.RequestedPost" />
+        <activity android:name=".Activity.RequestList"></activity>
     </application>
 
 </manifest>

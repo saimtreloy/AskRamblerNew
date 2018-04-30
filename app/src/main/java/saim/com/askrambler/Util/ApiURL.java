@@ -56,5 +56,8 @@ public class ApiURL {
     public static String getManagePost = "http://askrambler.com/Android_API/getManagePost.php";
     public static String makePostRequest = "http://askrambler.com/Android_API/makePostRequest.php";
     public static String getUserRequestPost = "http://askrambler.com/Android_API/getUserRequestPost.php";
+    public static String getRequestPost = "http://askrambler.com/Android_API/getRequestPost.php";
+    public static String getPostRequestStatus = "http://askrambler.com/Android_API/getPostRequestStatus.php";
+    public static String getPostRequestStatusUpdate = "http://askrambler.com/Android_API/getPostRequestStatusUpdate.php";
 
 }
