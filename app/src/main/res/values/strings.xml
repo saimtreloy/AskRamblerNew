@@ -68,4 +68,11 @@
     </string-array>
     <string name="title_activity_post_maps">Map</string>
     <string name="title_activity_maps">Map</string>
+
+    <string-array name="post_request_status">
+        <item>Confirm</item>
+        <item>Accept</item>
+        <item>Pending</item>
+        <item>Cancel</item>
+    </string-array>
 </resources>

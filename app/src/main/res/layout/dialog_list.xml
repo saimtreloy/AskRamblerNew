@@ -16,7 +16,6 @@
         android:textColor="#FFF"/>
     <ListView
         android:id="@+id/listDialog"
-        android:background="#444"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </ListView>
