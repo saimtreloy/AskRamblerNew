@@ -593,7 +593,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             JSONObject jsonObject = new JSONObject(response);
                             String code = jsonObject.getString("code");
                             if (code.equals("success")){
-                                Log.d("SAIM LOGIN FAILED", email + "\n" + f_name + " " + l_name + "\n" +id);
+                                Log.d("SAIM FACEBOOK LOGIN", email + "\n" + f_name + " " + l_name + "\n" +id);
                                 JSONArray jsonArray = jsonObject.getJSONArray("list");
                                 JSONObject jsonObjectList = jsonArray.getJSONObject(0);
 

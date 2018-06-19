@@ -72,7 +72,7 @@ public class Splash extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.d("SAIM SAIM SAIM", response);
+                        Log.d("SAIM SAVE GET ALL POST", response);
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             String code = jsonObject.getString("code");
@@ -118,11 +118,17 @@ public class Splash extends AppCompatActivity {
 
 
     public void SaveUserLogin() {
+        String e = new SharedPrefDatabase(getApplicationContext()).RetriveUserEmail();
+        String p = new SharedPrefDatabase(getApplicationContext()).RetriveUserPassword();
+
+        Log.d("SAIM USER LOGIN", e + "\n" + p);
+
+
         StringRequest stringRequest = new StringRequest(Request.Method.POST, ApiURL.getLogin,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.d("SAIM SAIM SAIM", response);
+                        Log.d("SAIM SAVE USER LOGIN", response);
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             String code = jsonObject.getString("code");
@@ -206,7 +212,7 @@ public class Splash extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Log.d("SAIM SAIM SAIM", response);
+                        Log.d("SAIM SAVE GET LOCATION", response);
                         try {
                             JSONObject jsonObject = new JSONObject(response);
 
