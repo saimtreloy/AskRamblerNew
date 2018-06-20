@@ -215,7 +215,22 @@ public class SearchResultActivity extends AppCompatActivity {
                                 allPostAdapter = new AdapterPost(modelPostsList);
                                 recyclerAllPost.setAdapter(allPostAdapter);
                             }else {
-                                Log.d("SAIM SPLASH 3", response);
+                                progressDialog.dismiss();
+                                new AwesomeWarningDialog(SearchResultActivity.this)
+                                        .setTitle("Search Result")
+                                        .setMessage("No result found.")
+                                        .setColoredCircle(R.color.dialogWarningBackgroundColor)
+                                        .setDialogIconAndColor(R.drawable.ic_dialog_warning, R.color.white)
+                                        .setCancelable(true)
+                                        .setButtonText(getString(R.string.dialog_ok_button))
+                                        .setButtonBackgroundColor(R.color.dialogWarningBackgroundColor)
+                                        .setButtonText(getString(R.string.dialog_ok_button))
+                                        .setWarningButtonClick(new Closure() {
+                                            @Override
+                                            public void exec() {
+                                                finish();
+                                            }
+                                        }).show();
                             }
 
 
@@ -279,7 +294,22 @@ public class SearchResultActivity extends AppCompatActivity {
                                 allPostAdapter = new AdapterPost(modelPostsList);
                                 recyclerAllPost.setAdapter(allPostAdapter);
                             }else {
-                                Log.d("SAIM SPLASH 3", response);
+                                progressDialog.dismiss();
+                                new AwesomeWarningDialog(SearchResultActivity.this)
+                                        .setTitle("Search Result")
+                                        .setMessage("No result found.")
+                                        .setColoredCircle(R.color.dialogWarningBackgroundColor)
+                                        .setDialogIconAndColor(R.drawable.ic_dialog_warning, R.color.white)
+                                        .setCancelable(true)
+                                        .setButtonText(getString(R.string.dialog_ok_button))
+                                        .setButtonBackgroundColor(R.color.dialogWarningBackgroundColor)
+                                        .setButtonText(getString(R.string.dialog_ok_button))
+                                        .setWarningButtonClick(new Closure() {
+                                            @Override
+                                            public void exec() {
+                                                finish();
+                                            }
+                                        }).show();
                             }
 
 
@@ -343,7 +373,22 @@ public class SearchResultActivity extends AppCompatActivity {
                                 allPostAdapter = new AdapterPost(modelPostsList);
                                 recyclerAllPost.setAdapter(allPostAdapter);
                             }else {
-                                Log.d("SAIM SPLASH 3", response);
+                                progressDialog.dismiss();
+                                new AwesomeWarningDialog(SearchResultActivity.this)
+                                        .setTitle("Search Result")
+                                        .setMessage("No result found.")
+                                        .setColoredCircle(R.color.dialogWarningBackgroundColor)
+                                        .setDialogIconAndColor(R.drawable.ic_dialog_warning, R.color.white)
+                                        .setCancelable(true)
+                                        .setButtonText(getString(R.string.dialog_ok_button))
+                                        .setButtonBackgroundColor(R.color.dialogWarningBackgroundColor)
+                                        .setButtonText(getString(R.string.dialog_ok_button))
+                                        .setWarningButtonClick(new Closure() {
+                                            @Override
+                                            public void exec() {
+                                                finish();
+                                            }
+                                        }).show();
                             }
 
 

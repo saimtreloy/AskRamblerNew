@@ -131,11 +131,18 @@ public class AdapterManagePost extends RecyclerView.Adapter<AdapterManagePost.Po
                     alert.show();
                 }
             });
+
+            imgEditList.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    v.getContext().startActivity(new Intent(v.getContext().getApplicationContext(), RequestList.class).putExtra("AD_ID", adapterList.get(getAdapterPosition()).getId()));
+                }
+            });
         }
 
         @Override
         public void onClick(View v) {
-            v.getContext().startActivity(new Intent(v.getContext().getApplicationContext(), RequestList.class).putExtra("AD_ID", adapterList.get(getAdapterPosition()).getId()));
+            v.getContext().startActivity(new Intent(v.getContext().getApplicationContext(), PostDetailActivity.class).putExtra("POST_ID", adapterList.get(getAdapterPosition()).getId()));
         }
 
 

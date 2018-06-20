@@ -6,7 +6,7 @@ package saim.com.askrambler.Model;
 
 public class ModelRequestedPost {
 
-    String id, status, email, ad_type, from_where, date, to_date, phone, date2;
+    String id, status, email, ad_type, from_where, date, to_date, phone, date2, ads_id;
 
     public ModelRequestedPost(String id, String status, String email, String ad_type, String from_where, String date, String to_date, String phone, String date2) {
         this.id = id;
@@ -18,6 +18,19 @@ public class ModelRequestedPost {
         this.to_date = to_date;
         this.phone = phone;
         this.date2 = date2;
+    }
+
+    public ModelRequestedPost(String id, String status, String email, String ad_type, String from_where, String date, String to_date, String phone, String date2, String ads_id) {
+        this.id = id;
+        this.status = status;
+        this.email = email;
+        this.ad_type = ad_type;
+        this.from_where = from_where;
+        this.date = date;
+        this.to_date = to_date;
+        this.phone = phone;
+        this.date2 = date2;
+        this.ads_id = ads_id;
     }
 
     public String getId() {
@@ -54,5 +67,9 @@ public class ModelRequestedPost {
 
     public String getDate2() {
         return date2;
+    }
+
+    public String getAds_id() {
+        return ads_id;
     }
 }

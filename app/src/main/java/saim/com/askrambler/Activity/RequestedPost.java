@@ -95,8 +95,9 @@ public class RequestedPost extends AppCompatActivity {
                                     String to_date = jsonObjectList.getString("to_date");
                                     String phone = jsonObjectList.getString("phone");
                                     String date2 = jsonObjectList.getString("date2");
+                                    String ads_id = jsonObjectList.getString("ads_id");
 
-                                    ModelRequestedPost modelRequestedPost = new ModelRequestedPost(id, status, email, ad_type, from_where, date, to_date, phone, date2);
+                                    ModelRequestedPost modelRequestedPost = new ModelRequestedPost(id, status, email, ad_type, from_where, date, to_date, phone, date2, ads_id);
                                     modelRequestedPosts.add(modelRequestedPost);
                                 }
                                 requestedPostAdapter = new AdapterRequestedPost(modelRequestedPosts);

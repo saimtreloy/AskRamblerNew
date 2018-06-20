@@ -1,6 +1,7 @@
 package saim.com.askrambler.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import saim.com.askrambler.Activity.PostDetailActivity;
+import saim.com.askrambler.Activity.RequestList;
 import saim.com.askrambler.Model.ModelManagePost;
 import saim.com.askrambler.Model.ModelRequestedPost;
 import saim.com.askrambler.R;
@@ -91,7 +94,7 @@ public class AdapterRequestedPost extends RecyclerView.Adapter<AdapterRequestedP
 
         @Override
         public void onClick(View v) {
-
+            v.getContext().startActivity(new Intent(v.getContext().getApplicationContext(), PostDetailActivity.class).putExtra("POST_ID", adapterList.get(getAdapterPosition()).getAds_id()));
         }
     }
 }
