@@ -200,7 +200,12 @@ public class PostDetailActivity extends AppCompatActivity implements BaseSliderV
         btnRequest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SubmitRequest(post_id, Splash.user_id, user_id);
+                if (new SharedPrefDatabase(getApplicationContext()).RetriveLogin() == null || new SharedPrefDatabase(getApplicationContext()).RetriveLogin().equals("No")){
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                }else if (new SharedPrefDatabase(getApplicationContext()).RetriveLogin().toString().equals("Yes") ){
+                    SubmitRequest(post_id, Splash.user_id, user_id);
+                }
+
             }
         });
 
